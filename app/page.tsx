@@ -125,7 +125,13 @@ export default function Home() {
             </div>
             <div>
               <p style={{ color: '#d1ccc6', fontSize: '16px', lineHeight: '1.8', marginBottom: '16px' }}>
-                automation-exercise replaces legacy testing sandboxes with a complete, production-grade e-commerce platform.
+                <span style={{
+                  color: '#d4a85a',
+                  fontWeight: '700',
+                  fontFamily: 'Playfair Display, serif',
+                  fontSize: '17px',
+                  letterSpacing: '-0.01em'
+                }}>automation-exercise</span> replaces legacy testing sandboxes with a complete, production-grade e-commerce platform.
                 Twelve products across five categories. Real shopping cart. Real form validation. Real checkout flow.
               </p>
               <p style={{ color: '#d1ccc6', fontSize: '16px', lineHeight: '1.8' }}>
