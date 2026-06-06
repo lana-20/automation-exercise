@@ -204,10 +204,7 @@ export default function CartPage() {
           {/* Layout */}
           <div className="two-col-responsive" style={{ display: 'grid', gridTemplateColumns: '1fr 340px' }}>
             {/* Cart Items */}
-            <section aria-label="Cart items" style={{
-              borderBottom: '2px solid #4aa8a5',
-              paddingBottom: '40px'
-            }}>
+            <section aria-label="Cart items">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                 {items.map((item, index) => {
                   const stock = getProductStock(item.productId)
