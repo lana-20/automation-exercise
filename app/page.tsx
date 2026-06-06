@@ -276,11 +276,11 @@ export default function Home() {
 
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px', marginBottom: '60px' }}>
             {[
-              { icon: '💻', name: 'Wireless Headphones Pro', price: '$79.99' },
-              { icon: '👕', name: 'Premium T-Shirt', price: '$24.99' },
-              { icon: '🏠', name: 'Coffee Maker Deluxe', price: '$89.99' }
+              { id: 'prod_001', icon: '💻', name: 'Wireless Headphones Pro', price: '$79.99' },
+              { id: 'prod_002', icon: '👕', name: 'Premium T-Shirt', price: '$24.99' },
+              { id: 'prod_007', icon: '🏠', name: 'Coffee Maker Deluxe', price: '$89.99' }
             ].map((product, i) => (
-              <Link key={i} href="/products" style={{ textDecoration: 'none', color: 'inherit' }}>
+              <Link key={i} href={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
                 <div style={{
                   background: '#0f1a2a',
                   border: '2px solid rgba(255,255,255,0.08)',
