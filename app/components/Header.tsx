@@ -6,64 +6,65 @@ import { useState } from 'react'
 
 export default function Header() {
   const { itemCount } = useCart()
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [searchQuery, setSearchQuery] = useState('')
 
   return (
     <>
-      <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
-        <nav className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      {/* Top Header */}
+      <header className="bg-gradient-to-b from-gray-800 to-gray-700 text-white py-3 sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 flex items-center gap-4">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center text-white font-bold text-lg group-hover:shadow-lg transition-shadow">
-              AE
-            </div>
-            <div>
-              <div className="font-bold text-gray-900 text-lg">automation<span className="text-blue-600">exercise</span></div>
-              <div className="text-xs text-gray-500 font-medium">Testing Platform</div>
-            </div>
+          <Link href="/" className="text-2xl font-bold flex-shrink-0 hover:opacity-80 transition">
+            automation<span className="text-amber-400">exercise</span>
           </Link>
 
-          {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
-            <Link href="/" className="text-gray-700 hover:text-blue-600 font-medium transition">Home</Link>
-            <Link href="/products" className="text-gray-700 hover:text-blue-600 font-medium transition">Products</Link>
-
-            <Link href="/cart" className="btn-primary text-sm">
-              <span>🛒</span>
-              Cart
-              {itemCount > 0 && (
-                <span className="ml-1 inline-flex items-center justify-center w-5 h-5 text-xs font-bold bg-white text-blue-600 rounded-full">
-                  {itemCount}
-                </span>
-              )}
-            </Link>
+          {/* Search Bar */}
+          <div className="flex-1 flex items-center bg-white rounded-md overflow-hidden max-w-2xl">
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="flex-1 px-4 py-2 text-black focus:outline-none"
+            />
+            <button className="bg-amber-400 hover:bg-amber-500 px-4 py-2 text-black font-bold transition">
+              🔍
+            </button>
           </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition"
-          >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-            </svg>
-          </button>
-        </nav>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 bg-gray-50">
-            <div className="px-4 py-4 space-y-3">
-              <Link href="/" className="block text-gray-700 hover:text-blue-600 font-medium py-2">Home</Link>
-              <Link href="/products" className="block text-gray-700 hover:text-blue-600 font-medium py-2">Products</Link>
-              <Link href="/cart" className="btn-primary w-full justify-center">
-                <span>🛒</span>
-                Cart {itemCount > 0 && `(${itemCount})`}
-              </Link>
+          {/* Cart */}
+          <Link href="/cart" className="flex items-center gap-2 hover:opacity-80 transition">
+            <div className="flex flex-col items-end">
+              <span className="text-xs">Your</span>
+              <span className="font-bold">Cart</span>
             </div>
-          </div>
-        )}
+            <div className="text-2xl">🛒</div>
+            {itemCount > 0 && (
+              <span className="absolute ml-12 -mt-6 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {itemCount}
+              </span>
+            )}
+          </Link>
+        </div>
       </header>
+
+      {/* Navigation Bar */}
+      <nav className="bg-gray-700 text-white py-3 border-b border-gray-600">
+        <div className="max-w-7xl mx-auto px-4 flex items-center gap-6">
+          <button className="text-sm hover:bg-gray-600 px-2 py-1 rounded transition">
+            ☰ All
+          </button>
+          <Link href="/products" className="text-sm hover:bg-gray-600 px-2 py-1 rounded transition">
+            Products
+          </Link>
+          <Link href="/" className="text-sm hover:bg-gray-600 px-2 py-1 rounded transition">
+            Home
+          </Link>
+          <a href="#" className="text-sm text-amber-400 font-bold hover:bg-gray-600 px-2 py-1 rounded transition">
+            Today's Deals
+          </a>
+        </div>
+      </nav>
     </>
   )
 }
