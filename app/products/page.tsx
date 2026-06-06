@@ -47,7 +47,7 @@ export default function ProductsPage() {
         paddingTop: '60px',
         paddingBottom: '60px',
         background: '#0f1a2a',
-        borderBottom: "3px solid #4aa8a5", older: { borderBottom: "1px solid rgba(255,255,255,0.08)'
+        borderBottom: '1px solid rgba(255,255,255,0.08)'
       }}>
         <div style={{
           width: '100%',
@@ -82,7 +82,7 @@ export default function ProductsPage() {
         paddingTop: '40px',
         paddingBottom: '40px',
         background: '#0f1a2a',
-        borderBottom: "3px solid #4aa8a5", older: { borderBottom: "1px solid rgba(255,255,255,0.08)'
+        borderBottom: '1px solid rgba(255,255,255,0.08)'
       }}>
         <div style={{
           width: '100%',
@@ -262,7 +262,7 @@ export default function ProductsPage() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         fontSize: '64px',
-                        borderBottom: "3px solid #4aa8a5", older: { borderBottom: "1px solid rgba(255,255,255,0.08)'
+                        borderBottom: '1px solid rgba(255,255,255,0.08)'
                       }}>
                         {categoryEmoji[product.category] || '📦'}
                       </div>

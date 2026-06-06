@@ -83,7 +83,7 @@ export default function ProductPage({ params }: ProductPageProps) {
     <main style={{ background: '#0f1a2a', minHeight: '100vh' }}>
       {/* Header */}
       <section style={{
-        borderBottom: "3px solid #7455bf", older: { borderBottom: "1px solid rgba(255,255,255,0.08)',
+        borderBottom: '1px solid rgba(255,255,255,0.08)',
         paddingTop: '24px',
         paddingBottom: '24px'
       }}>
