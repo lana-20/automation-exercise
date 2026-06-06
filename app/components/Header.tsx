@@ -9,7 +9,8 @@ export default function Header() {
   return (
     <header style={{
       borderBottom: '1px solid rgba(255,255,255,0.08)',
-      background: '#0f1a2a',
+      background: 'rgba(15, 26, 42, 0.88)',
+      backdropFilter: 'blur(12px)',
       position: 'sticky',
       top: 0,
       zIndex: 50,
