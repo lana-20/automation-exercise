@@ -44,8 +44,8 @@ export default function Home() {
             marginBottom: '56px',
             fontFamily: 'Inter, sans-serif'
           }}>
-            A production-grade e-commerce testing platform designed for professional automation engineers.
-            Real checkout flows, comprehensive form validation, and the friction of modern commerce systems.
+            A production-grade e-commerce testing platform designed for automation engineers and agentic systems.
+            Real checkout flows, comprehensive form validation, and the friction of modern commerce. Built for traditional automation and multi-agent testing orchestration.
           </p>
           <Link href="/products" className="btn-primary" style={{
             display: 'inline-block',
@@ -132,10 +132,10 @@ export default function Home() {
                   fontSize: '17px',
                   letterSpacing: '-0.01em'
                 }}>automation-exercise</span> replaces legacy testing sandboxes with a complete, production-grade e-commerce platform.
-                Twelve products across five categories. Real shopping cart. Real form validation. Real checkout flow.
+                Twelve products across five categories. Real shopping cart. Real form validation. Real checkout flow. Perfect for both traditional automation and agentic testing frameworks.
               </p>
               <p style={{ color: '#d1ccc6', fontSize: '16px', lineHeight: '1.8' }}>
-                Every interaction is authentic. Every validation is thorough. Every edge case is present.
+                Every interaction is authentic. Every validation is thorough. Every edge case is present. Designed to support multi-agent orchestration and autonomous test execution.
               </p>
             </div>
           </div>
@@ -557,9 +557,19 @@ export default function Home() {
                 fontFamily: 'Inter, sans-serif',
                 fontSize: '14px',
                 color: '#d1ccc6',
-                lineHeight: '1.6'
+                lineHeight: '1.6',
+                marginBottom: 0
               }}>
                 A professional e-commerce testing platform built for automation engineers.
+              </p>
+              <p style={{
+                fontFamily: 'Inter, sans-serif',
+                fontSize: '12px',
+                color: '#a8a39d',
+                lineHeight: '1.6',
+                marginTop: '8px'
+              }}>
+                Optimized for agentic testing & multi-agent automation.
               </p>
             </div>
             <div>
@@ -616,7 +626,7 @@ export default function Home() {
               color: '#a8a39d',
               letterSpacing: '0.08em'
             }}>
-              A production-grade e-commerce testing sandbox for automation engineers.
+              Production-grade e-commerce sandbox for automation & agentic testing.
             </p>
           </div>
         </div>
