@@ -22,9 +22,7 @@ export default function RootLayout({
       <body style={{ margin: 0, padding: 0, background: '#0f1a2a', color: '#f5f0eb' }}>
         <CartProvider>
           <Header />
-          <main style={{ minHeight: '100vh' }}>
-            {children}
-          </main>
+          {children}
         </CartProvider>
       </body>
     </html>
