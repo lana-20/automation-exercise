@@ -7,66 +7,102 @@ export default function Header() {
   const { itemCount } = useCart()
 
   return (
-    <header className="border-b border-gray-200 bg-white sticky top-0 z-50">
+    <header className="bg-gray-900 text-white sticky top-0 z-50 border-b border-gray-800">
+      {/* Top Bar */}
+      <div className="bg-gray-900 py-2 px-6 text-xs flex items-center justify-between border-b border-gray-800">
+        <div className="flex gap-6">
+          <span>Delivering to Seattle 98168</span>
+          <span>Update location</span>
+        </div>
+        <div className="flex gap-6">
+          <span>Hello, Sign in</span>
+          <span>Account & Lists</span>
+          <span>Returns & Orders</span>
+        </div>
+      </div>
+
       {/* Main Header */}
-      <div className="container-wide py-4 flex items-center justify-between gap-8">
+      <div className="flex items-center gap-4 px-6 py-3">
         {/* Logo */}
-        <Link href="/" className="flex-shrink-0 hover:opacity-80 transition">
-          <div className="text-2xl font-bold">
-            automation<span className="text-amber-500">exercise</span>
-          </div>
-          <div className="text-xs text-gray-600 font-medium">Testing Platform</div>
+        <Link href="/" className="flex-shrink-0 text-white font-bold text-xl hover:opacity-80 transition">
+          automation<span className="text-amber-400">exercise</span>
         </Link>
 
         {/* Search Bar */}
-        <div className="flex-1 max-w-2xl">
-          <div className="flex items-center bg-gray-100 rounded-lg overflow-hidden hover:bg-gray-150 transition">
-            <input
-              type="text"
-              placeholder="Search products, categories..."
-              className="flex-1 px-6 py-3 bg-transparent focus:outline-none text-sm"
-            />
-            <button className="px-6 py-3 text-gray-600 hover:text-gray-900 transition font-medium text-sm">
-              🔍
-            </button>
-          </div>
+        <div className="flex-1 flex">
+          <select className="bg-gray-100 text-black px-3 py-2 rounded-l text-sm font-medium">
+            <option>All</option>
+            <option>Electronics</option>
+            <option>Apparel</option>
+            <option>Home</option>
+            <option>Books</option>
+          </select>
+          <input
+            type="text"
+            placeholder="Search products..."
+            className="flex-1 px-4 py-2 text-black text-sm focus:outline-none"
+          />
+          <button className="bg-amber-400 hover:bg-amber-500 text-black px-4 py-2 rounded-r font-bold transition">
+            🔍
+          </button>
         </div>
 
-        {/* Cart & Account */}
-        <div className="flex items-center gap-8">
-          <div className="text-center">
-            <div className="text-xs text-gray-600 font-medium">Returns</div>
-            <div className="text-xs text-gray-600">& Orders</div>
+        {/* Right Section */}
+        <div className="flex items-center gap-6">
+          <div className="text-center text-xs">
+            <div className="text-gray-400">EN</div>
+            <div>🌐</div>
           </div>
 
-          <Link href="/cart" className="hover:opacity-80 transition relative">
-            <div className="text-center">
-              <div className="text-2xl mb-1">🛒</div>
-              <div className="text-xs font-semibold text-gray-900">Cart</div>
-              {itemCount > 0 && (
-                <span className="absolute -top-2 -right-3 bg-amber-500 text-white text-xs font-bold rounded-full w-6 h-6 flex items-center justify-center">
-                  {itemCount}
-                </span>
-              )}
-            </div>
+          <div className="text-center text-xs cursor-pointer hover:opacity-80">
+            <div className="text-gray-400">Hello, Sign in</div>
+            <div className="font-bold">Account & Lists</div>
+          </div>
+
+          <div className="text-center text-xs cursor-pointer hover:opacity-80">
+            <div className="text-gray-400">Returns</div>
+            <div className="font-bold">& Orders</div>
+          </div>
+
+          <Link href="/cart" className="text-center hover:opacity-80 transition relative">
+            <div className="text-2xl">🛒</div>
+            {itemCount > 0 && (
+              <span className="absolute -top-1 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+                {itemCount}
+              </span>
+            )}
           </Link>
         </div>
       </div>
 
-      {/* Navigation Bar */}
-      <div className="bg-gray-50 border-t border-gray-200">
-        <div className="container-wide flex items-center gap-8 py-3">
-          <button className="text-sm font-medium text-gray-700 hover:text-gray-900 transition flex items-center gap-1">
-            <span>☰</span> Categories
-          </button>
-          <Link href="/products" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition">
-            All Products
+      {/* Category Navigation */}
+      <div className="bg-gray-800 px-6 py-2 overflow-x-auto scrollbar-hide">
+        <div className="flex gap-6 text-sm font-medium text-white whitespace-nowrap">
+          <button className="hover:text-amber-400 transition">☰ All</button>
+          <Link href="/products" className="hover:text-amber-400 transition">
+            Electronics
           </Link>
-          <Link href="/" className="text-sm font-medium text-gray-700 hover:text-gray-900 transition">
-            Home
+          <Link href="/products" className="hover:text-amber-400 transition">
+            Apparel
           </Link>
-          <div className="flex-1"></div>
-          <span className="text-sm text-amber-600 font-bold">Today's Deals</span>
+          <Link href="/products" className="hover:text-amber-400 transition">
+            Home & Garden
+          </Link>
+          <Link href="/products" className="hover:text-amber-400 transition">
+            Books
+          </Link>
+          <Link href="/products" className="hover:text-amber-400 transition">
+            Best Sellers
+          </Link>
+          <Link href="/products" className="hover:text-amber-400 transition">
+            New Releases
+          </Link>
+          <Link href="/products" className="hover:text-amber-400 transition">
+            Prime
+          </Link>
+          <a href="#" className="text-amber-400 font-bold hover:text-amber-300 transition">
+            Today's Deals
+          </a>
         </div>
       </div>
     </header>

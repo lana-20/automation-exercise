@@ -1,277 +1,323 @@
-import Link from 'next/link'
-import ProductGrid from './components/ProductGrid'
+import HeroBanner from './components/HeroBanner'
+import ProductCarousel from './components/ProductCarousel'
+
+const featuredProducts = [
+  {
+    id: '1',
+    name: 'Wireless Headphones Pro',
+    price: 79.99,
+    originalPrice: 129.99,
+    discount: 38,
+    category: 'Electronics',
+    limited: true,
+  },
+  {
+    id: '2',
+    name: 'Smart Watch Ultra',
+    price: 199.99,
+    originalPrice: 299.99,
+    discount: 33,
+    category: 'Electronics',
+    limited: true,
+  },
+  {
+    id: '3',
+    name: 'Premium T-Shirt',
+    price: 24.99,
+    originalPrice: 49.99,
+    discount: 50,
+    category: 'Apparel',
+    limited: true,
+  },
+  {
+    id: '4',
+    name: 'Running Shoes',
+    price: 59.99,
+    originalPrice: 99.99,
+    discount: 40,
+    category: 'Apparel',
+    limited: false,
+  },
+  {
+    id: '5',
+    name: 'Coffee Maker Deluxe',
+    price: 89.99,
+    originalPrice: 159.99,
+    discount: 44,
+    category: 'Home',
+    limited: true,
+  },
+  {
+    id: '6',
+    name: 'Desk Lamp LED',
+    price: 34.99,
+    originalPrice: 59.99,
+    discount: 42,
+    category: 'Home',
+    limited: false,
+  },
+  {
+    id: '7',
+    name: 'JavaScript Guide',
+    price: 29.99,
+    originalPrice: 49.99,
+    discount: 40,
+    category: 'Books',
+    limited: false,
+  },
+  {
+    id: '8',
+    name: 'Testing Automation',
+    price: 39.99,
+    originalPrice: 69.99,
+    discount: 43,
+    category: 'Books',
+    limited: true,
+  },
+]
+
+const premiumProducts = featuredProducts.filter((p) => p.discount && p.discount > 40)
+
+const newProducts = [
+  {
+    id: '9',
+    name: 'Ultra Wireless Earbuds',
+    price: 99.99,
+    category: 'Electronics',
+  },
+  {
+    id: '10',
+    name: 'Summer Collection Shorts',
+    price: 34.99,
+    category: 'Apparel',
+  },
+  {
+    id: '11',
+    name: 'Portable Speaker',
+    price: 49.99,
+    originalPrice: 79.99,
+    discount: 37,
+    category: 'Electronics',
+    limited: true,
+  },
+  {
+    id: '12',
+    name: 'Pillow Set Premium',
+    price: 44.99,
+    originalPrice: 74.99,
+    discount: 40,
+    category: 'Home',
+    limited: false,
+  },
+]
 
 export default function Home() {
   return (
     <main className="bg-white">
-      {/* Hero Banner - Spacious */}
-      <section className="bg-gradient-to-r from-blue-50 to-indigo-50 border-b border-gray-200">
-        <div className="container-wide py-16 md:py-24">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
-              automation-exercise
-            </h1>
-            <p className="text-xl text-gray-700 mb-8 leading-relaxed max-w-2xl font-light">
-              A fully functional e-commerce testing sandbox built for automation testing education, comprehensive benchmarking, and professional learning.
+      {/* Hero Banner */}
+      <HeroBanner />
+
+      {/* Promotional Cards Grid */}
+      <div className="bg-white px-6 py-6">
+        <div className="grid grid-cols-4 gap-6">
+          <div className="bg-white border border-gray-200 rounded p-6 hover:shadow-lg transition">
+            <h3 className="font-bold text-lg mb-4">Today's Deals</h3>
+            <div className="text-4xl mb-4">⚡</div>
+            <p className="text-sm text-gray-700 mb-4">
+              Shop limited-time deals across all categories
             </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/products" className="btn-primary">
-                Start Exploring
-              </Link>
-              <Link href="/products" className="btn-secondary">
-                Browse All Products
-              </Link>
-            </div>
+            <a href="#" className="text-blue-600 hover:text-red-600 font-bold text-sm">
+              See today's deals
+            </a>
+          </div>
+
+          <div className="bg-white border border-gray-200 rounded p-6 hover:shadow-lg transition">
+            <h3 className="font-bold text-lg mb-4">Electronics</h3>
+            <div className="text-4xl mb-4">💻</div>
+            <p className="text-sm text-gray-700 mb-4">
+              Explore tech gadgets and devices
+            </p>
+            <a href="#" className="text-blue-600 hover:text-red-600 font-bold text-sm">
+              Shop Electronics
+            </a>
+          </div>
+
+          <div className="bg-white border border-gray-200 rounded p-6 hover:shadow-lg transition">
+            <h3 className="font-bold text-lg mb-4">Apparel</h3>
+            <div className="text-4xl mb-4">👕</div>
+            <p className="text-sm text-gray-700 mb-4">
+              Latest fashion and clothing
+            </p>
+            <a href="#" className="text-blue-600 hover:text-red-600 font-bold text-sm">
+              Shop Apparel
+            </a>
+          </div>
+
+          <div className="bg-white border border-gray-200 rounded p-6 hover:shadow-lg transition">
+            <h3 className="font-bold text-lg mb-4">Home & Garden</h3>
+            <div className="text-4xl mb-4">🏠</div>
+            <p className="text-sm text-gray-700 mb-4">
+              Everything for your home
+            </p>
+            <a href="#" className="text-blue-600 hover:text-red-600 font-bold text-sm">
+              Shop Home
+            </a>
           </div>
         </div>
-      </section>
+      </div>
 
-      {/* Why Section - More Spacious */}
-      <section className="bg-white border-b border-gray-200">
-        <div className="container-wide py-20">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Why automation-exercise?</h2>
-          <p className="text-lg text-gray-700 mb-12 font-light max-w-3xl">
-            Everything you need for real-world automation testing practice in one professional platform.
-          </p>
+      {/* Featured Deals */}
+      <ProductCarousel title="Lightning Deals" products={featuredProducts} />
 
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: '🛍️',
-                title: 'Complete Product Catalog',
-                desc: '12 products across 5 carefully designed categories with realistic pricing, stock management, and detailed product specifications.',
-              },
-              {
-                icon: '🔍',
-                title: 'Powerful Search & Filter',
-                desc: 'Find exactly what you need with intelligent search functionality, category filtering, and sorting by multiple criteria.',
-              },
-              {
-                icon: '✓',
-                title: 'Professional Checkout',
-                desc: 'Complete order flow with form validation, shipping options, payment processing, and order confirmation.',
-              },
-            ].map((feature, idx) => (
-              <div key={idx} className="card p-8 hover:border-amber-300">
-                <div className="text-5xl mb-6">{feature.icon}</div>
-                <h3 className="text-lg font-bold text-gray-900 mb-3">{feature.title}</h3>
-                <p className="text-gray-700 leading-relaxed">{feature.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Heavy Discounts */}
+      <ProductCarousel
+        title="Up to 50% off - Limited time deals"
+        products={premiumProducts}
+      />
 
-      {/* Featured Products - Large Section */}
-      <section className="bg-gray-50 border-b border-gray-200">
-        <div className="container-wide py-20">
-          <div className="flex items-end justify-between mb-12">
-            <div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-3">Featured Products</h2>
-              <p className="text-gray-700 font-light">
-                Explore our selection of test products with real-world scenarios
-              </p>
+      {/* New Releases */}
+      <ProductCarousel title="New Releases" products={newProducts} />
+
+      {/* Info Section */}
+      <div className="bg-white border-t border-gray-200 py-8 px-6">
+        <h2 className="text-2xl font-bold mb-6">Why Choose automation-exercise?</h2>
+
+        <div className="grid grid-cols-4 gap-6">
+          {[
+            {
+              title: 'Real E-Commerce Flow',
+              desc: 'Complete checkout experience with validation',
+            },
+            {
+              title: '12 Test Products',
+              desc: 'Diverse products across 5 categories',
+            },
+            {
+              title: 'Edge Cases Built-in',
+              desc: 'Stock limits, price calculations, validation',
+            },
+            {
+              title: 'Professional Testing',
+              desc: 'Designed for automation testing professionals',
+            },
+          ].map((item, idx) => (
+            <div key={idx} className="border border-gray-200 rounded p-4">
+              <h3 className="font-bold mb-2 text-sm">{item.title}</h3>
+              <p className="text-xs text-gray-700">{item.desc}</p>
             </div>
-            <Link href="/products" className="text-amber-700 hover:text-amber-800 font-semibold text-sm transition">
-              See all products →
-            </Link>
-          </div>
-          <ProductGrid />
+          ))}
         </div>
-      </section>
-
-      {/* Testing Scenarios Section */}
-      <section className="bg-white border-b border-gray-200">
-        <div className="container-wide py-20">
-          <h2 className="text-3xl font-bold text-gray-900 mb-4">Testing Scenarios</h2>
-          <p className="text-lg text-gray-700 mb-12 font-light max-w-3xl">
-            Practice real-world testing workflows and master automation testing fundamentals.
-          </p>
-
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {[
-              {
-                title: 'Happy Path Workflows',
-                items: [
-                  'Complete browse-to-checkout journey',
-                  'Product discovery and selection',
-                  'Cart management and updates',
-                  'Successful order completion',
-                ],
-              },
-              {
-                title: 'Edge Cases & Boundaries',
-                items: [
-                  'Stock limit handling',
-                  'Form field boundaries',
-                  'Price calculations with tax',
-                  'Shipping method selection',
-                ],
-              },
-              {
-                title: 'Error Scenarios',
-                items: [
-                  'Form validation errors',
-                  'Invalid input handling',
-                  'Out-of-stock conditions',
-                  'Payment failure scenarios',
-                ],
-              },
-              {
-                title: 'Advanced Testing',
-                items: [
-                  'Dynamic element interactions',
-                  'State management verification',
-                  'UI accessibility testing',
-                  'Performance benchmarking',
-                ],
-              },
-            ].map((section, idx) => (
-              <div key={idx} className="card p-8">
-                <h3 className="text-lg font-bold text-gray-900 mb-6">{section.title}</h3>
-                <ul className="space-y-3">
-                  {section.items.map((item, itemIdx) => (
-                    <li key={itemIdx} className="flex gap-3 text-gray-700">
-                      <span className="text-amber-500 font-bold flex-shrink-0">•</span>
-                      <span className="leading-relaxed">{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section - Clean & Spacious */}
-      <section className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white border-b border-blue-700">
-        <div className="container-wide py-20">
-          <h2 className="text-3xl font-bold mb-16 text-center">By The Numbers</h2>
-          <div className="grid md:grid-cols-4 gap-12 text-center">
-            <div>
-              <div className="text-5xl font-bold mb-3">12</div>
-              <div className="text-lg font-light">Products</div>
-            </div>
-            <div>
-              <div className="text-5xl font-bold mb-3">5</div>
-              <div className="text-lg font-light">Categories</div>
-            </div>
-            <div>
-              <div className="text-5xl font-bold mb-3">100+</div>
-              <div className="text-lg font-light">Test Cases</div>
-            </div>
-            <div>
-              <div className="text-5xl font-bold mb-3">∞</div>
-              <div className="text-lg font-light">Scenarios</div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA - Spacious */}
-      <section className="bg-white border-b border-gray-200">
-        <div className="container-wide py-20 text-center">
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">Ready to Get Started?</h2>
-          <p className="text-xl text-gray-700 mb-10 font-light max-w-2xl mx-auto leading-relaxed">
-            Begin your automation testing journey with a professional, fully-featured e-commerce platform designed for real-world learning and benchmarking.
-          </p>
-          <Link href="/products" className="btn-primary">
-            Explore All Products
-          </Link>
-        </div>
-      </section>
+      </div>
 
       {/* Footer */}
-      <footer className="bg-gray-50 border-t border-gray-200">
-        <div className="container-wide py-16">
-          <div className="grid md:grid-cols-4 gap-12 mb-12">
-            <div>
-              <h4 className="font-bold text-gray-900 mb-4">Get to Know Us</h4>
-              <ul className="space-y-3">
-                <li>
-                  <a href="#" className="text-gray-700 hover:text-gray-900 text-sm transition">
-                    About Us
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-700 hover:text-gray-900 text-sm transition">
-                    Careers
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-700 hover:text-gray-900 text-sm transition">
-                    Blog
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-gray-900 mb-4">Testing Resources</h4>
-              <ul className="space-y-3">
-                <li>
-                  <a href="#" className="text-gray-700 hover:text-gray-900 text-sm transition">
-                    Documentation
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-700 hover:text-gray-900 text-sm transition">
-                    API Reference
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-700 hover:text-gray-900 text-sm transition">
-                    Guides
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-gray-900 mb-4">Community</h4>
-              <ul className="space-y-3">
-                <li>
-                  <a href="#" className="text-gray-700 hover:text-gray-900 text-sm transition">
-                    GitHub
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-700 hover:text-gray-900 text-sm transition">
-                    Forums
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-700 hover:text-gray-900 text-sm transition">
-                    Contact
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-bold text-gray-900 mb-4">Legal</h4>
-              <ul className="space-y-3">
-                <li>
-                  <a href="#" className="text-gray-700 hover:text-gray-900 text-sm transition">
-                    Privacy Policy
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-700 hover:text-gray-900 text-sm transition">
-                    Terms of Service
-                  </a>
-                </li>
-                <li>
-                  <a href="#" className="text-gray-700 hover:text-gray-900 text-sm transition">
-                    License
-                  </a>
-                </li>
-              </ul>
-            </div>
+      <div className="bg-gray-900 text-white py-12 px-6 text-sm">
+        <div className="grid grid-cols-5 gap-8 mb-8">
+          <div>
+            <h4 className="font-bold mb-4">Get to Know Us</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  About Us
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  Careers
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  Blog
+                </a>
+              </li>
+            </ul>
           </div>
-
-          <div className="border-t border-gray-300 pt-8 text-center text-gray-600 text-sm">
-            <p>&copy; 2024 automation-exercise. All rights reserved.</p>
+          <div>
+            <h4 className="font-bold mb-4">Testing Resources</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  Documentation
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  API Reference
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  Guides
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-bold mb-4">Community</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  GitHub
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  Forums
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  Contact
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-bold mb-4">Features</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  Pricing
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  FAQ
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  Support
+                </a>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="font-bold mb-4">Legal</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  Privacy
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  Terms
+                </a>
+              </li>
+              <li>
+                <a href="#" className="hover:text-amber-400">
+                  License
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
-      </footer>
+
+        <div className="border-t border-gray-700 pt-8 text-center text-gray-500">
+          <p>&copy; 2024 automation-exercise. All rights reserved.</p>
+        </div>
+      </div>
     </main>
   )
 }
