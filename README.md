@@ -2,8 +2,8 @@
 
 A production-grade e-commerce testing sandbox built with **Next.js 16**, **TypeScript**, **React**, and **Tailwind CSS**. Optimized for both traditional automation testing and agentic/multi-agent testing frameworks.
 
-**Live:** https://automation-exercise-l597m4a8p-begunova-1027s-projects.vercel.app  
-**Custom Domain:** automation-exercise.daisyladybug.com (DNS active, SSL deploying)  
+**Live:** https://automation-exercise.daisyladybug.com  
+**Vercel URL:** https://automation-exercise-l597m4a8p-begunova-1027s-projects.vercel.app  
 **Repository:** https://github.com/lana-20/automation-exercise
 
 ---
