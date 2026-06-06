@@ -7,103 +7,112 @@ export default function Header() {
   const { itemCount } = useCart()
 
   return (
-    <header className="bg-gray-900 text-white sticky top-0 z-50 border-b border-gray-800">
-      {/* Top Bar */}
-      <div className="bg-gray-900 py-2 px-6 text-xs flex items-center justify-between border-b border-gray-800">
-        <div className="flex gap-6">
-          <span>Delivering to Seattle 98168</span>
-          <span>Update location</span>
-        </div>
-        <div className="flex gap-6">
-          <span>Hello, Sign in</span>
-          <span>Account & Lists</span>
-          <span>Returns & Orders</span>
-        </div>
-      </div>
-
-      {/* Main Header */}
-      <div className="flex items-center gap-4 px-6 py-3">
-        {/* Logo */}
-        <Link href="/" className="flex-shrink-0 text-white font-bold text-xl hover:opacity-80 transition">
-          automation<span className="text-amber-400">exercise</span>
+    <header style={{
+      borderBottom: '1px solid rgba(255,255,255,0.08)',
+      background: 'rgba(15, 26, 42, 0.88)',
+      backdropFilter: 'blur(12px)',
+      position: 'sticky',
+      top: 0,
+      zIndex: 50,
+      padding: '16px 0'
+    }}>
+      <div style={{
+        maxWidth: '1280px',
+        margin: '0 auto',
+        padding: '0 48px',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        gap: '48px'
+      }}>
+        {/* Logo/Brand */}
+        <Link href="/" style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          textDecoration: 'none',
+          color: '#f5f0eb',
+          flexShrink: 0
+        }}>
+          <div style={{
+            fontFamily: 'Playfair Display, serif',
+            fontSize: '22px',
+            fontWeight: '500',
+            letterSpacing: '-0.01em'
+          }}>
+            ae
+          </div>
         </Link>
 
-        {/* Search Bar */}
-        <div className="flex-1 flex">
-          <select className="bg-gray-100 text-black px-3 py-2 rounded-l text-sm font-medium">
-            <option>All</option>
-            <option>Electronics</option>
-            <option>Apparel</option>
-            <option>Home</option>
-            <option>Books</option>
-          </select>
-          <input
-            type="text"
-            placeholder="Search products..."
-            className="flex-1 px-4 py-2 text-black text-sm focus:outline-none"
-          />
-          <button className="bg-amber-400 hover:bg-amber-500 text-black px-4 py-2 rounded-r font-bold transition">
-            🔍
-          </button>
-        </div>
+        {/* Spacer */}
+        <div style={{ flex: 1 }} />
 
-        {/* Right Section */}
-        <div className="flex items-center gap-6">
-          <div className="text-center text-xs">
-            <div className="text-gray-400">EN</div>
-            <div>🌐</div>
-          </div>
+        {/* Navigation Links */}
+        <nav style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '32px',
+          fontSize: '14px'
+        }}>
+          <Link href="/products" style={{
+            color: 'rgba(245,240,235,0.65)',
+            textDecoration: 'none',
+            fontFamily: 'Inter, sans-serif',
+            transition: 'color 150ms'
+          }}
+          onMouseEnter={(e) => e.currentTarget.style.color = '#f5f0eb'}
+          onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(245,240,235,0.65)'}>
+            Products
+          </Link>
+        </nav>
 
-          <div className="text-center text-xs cursor-pointer hover:opacity-80">
-            <div className="text-gray-400">Hello, Sign in</div>
-            <div className="font-bold">Account & Lists</div>
-          </div>
-
-          <div className="text-center text-xs cursor-pointer hover:opacity-80">
-            <div className="text-gray-400">Returns</div>
-            <div className="font-bold">& Orders</div>
-          </div>
-
-          <Link href="/cart" className="text-center hover:opacity-80 transition relative">
-            <div className="text-2xl">🛒</div>
-            {itemCount > 0 && (
-              <span className="absolute -top-1 -right-2 bg-red-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
-                {itemCount}
-              </span>
-            )}
-          </Link>
-        </div>
-      </div>
-
-      {/* Category Navigation */}
-      <div className="bg-gray-800 px-6 py-2 overflow-x-auto scrollbar-hide">
-        <div className="flex gap-6 text-sm font-medium text-white whitespace-nowrap">
-          <button className="hover:text-amber-400 transition">☰ All</button>
-          <Link href="/products" className="hover:text-amber-400 transition">
-            Electronics
-          </Link>
-          <Link href="/products" className="hover:text-amber-400 transition">
-            Apparel
-          </Link>
-          <Link href="/products" className="hover:text-amber-400 transition">
-            Home & Garden
-          </Link>
-          <Link href="/products" className="hover:text-amber-400 transition">
-            Books
-          </Link>
-          <Link href="/products" className="hover:text-amber-400 transition">
-            Best Sellers
-          </Link>
-          <Link href="/products" className="hover:text-amber-400 transition">
-            New Releases
-          </Link>
-          <Link href="/products" className="hover:text-amber-400 transition">
-            Prime
-          </Link>
-          <a href="#" className="text-amber-400 font-bold hover:text-amber-300 transition">
-            Today's Deals
-          </a>
-        </div>
+        {/* Cart Button */}
+        <Link href="/cart" style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '8px',
+          padding: '8px 16px',
+          background: 'rgba(212, 85, 42, 0.1)',
+          border: '1px solid rgba(212, 85, 42, 0.3)',
+          borderRadius: '4px',
+          color: '#d4552a',
+          textDecoration: 'none',
+          fontFamily: 'Inter, sans-serif',
+          fontSize: '13px',
+          fontWeight: '600',
+          letterSpacing: '0.5px',
+          transition: 'all 150ms',
+          flexShrink: 0,
+          cursor: 'pointer'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.background = 'rgba(212, 85, 42, 0.2)'
+          e.currentTarget.style.borderColor = '#d4552a'
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.background = 'rgba(212, 85, 42, 0.1)'
+          e.currentTarget.style.borderColor = 'rgba(212, 85, 42, 0.3)'
+        }}>
+          <span>🛒</span>
+          <span>Cart</span>
+          {itemCount > 0 && (
+            <span style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              width: '20px',
+              height: '20px',
+              background: '#d4552a',
+              borderRadius: '999px',
+              fontSize: '11px',
+              fontWeight: '700',
+              color: '#0f1a2a'
+            }}>
+              {itemCount}
+            </span>
+          )}
+        </Link>
       </div>
     </header>
   )

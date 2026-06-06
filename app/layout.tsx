@@ -15,10 +15,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-dlb-bg text-dlb-off-white">
+      <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+      </head>
+      <body style={{ margin: 0, padding: 0, background: '#0f1a2a', color: '#f5f0eb' }}>
         <CartProvider>
           <Header />
-          <main className="min-h-screen">
+          <main style={{ minHeight: '100vh' }}>
             {children}
           </main>
         </CartProvider>

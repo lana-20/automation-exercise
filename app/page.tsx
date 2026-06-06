@@ -7,25 +7,30 @@ export default function Home() {
     <main style={{ background: '#0f1a2a' }}>
       {/* Hero Section */}
       <section style={{
-        paddingTop: '96px',
-        paddingBottom: '96px',
+        paddingTop: '120px',
+        paddingBottom: '120px',
         background: 'linear-gradient(135deg, #0f1a2a 0%, #13243a 100%)',
         borderBottom: '1px solid rgba(255,255,255,0.08)'
       }}>
         <div className="container-wide">
           <h1 style={{
-            marginBottom: '24px',
+            marginBottom: '32px',
             maxWidth: '90%',
-            color: '#f5f0eb'
+            color: '#f5f0eb',
+            fontSize: '64px',
+            fontFamily: 'Playfair Display, serif',
+            fontWeight: '500',
+            letterSpacing: '-0.01em'
           }}>
             automation-exercise
           </h1>
           <p style={{
-            fontSize: '16px',
+            fontSize: '18px',
             lineHeight: '1.8',
             maxWidth: '70ch',
             color: 'rgba(245,240,235,0.65)',
-            marginBottom: '48px'
+            marginBottom: '56px',
+            fontFamily: 'Inter, sans-serif'
           }}>
             A production-grade e-commerce testing platform designed for professional automation engineers.
             Real checkout flows, comprehensive form validation, and the friction of modern commerce systems.
@@ -38,25 +43,29 @@ export default function Home() {
 
       {/* What This Is */}
       <section style={{
-        paddingTop: '80px',
-        paddingBottom: '80px',
+        paddingTop: '120px',
+        paddingBottom: '120px',
         background: '#0f1a2a',
         borderBottom: '1px solid rgba(255,255,255,0.08)'
       }}>
         <div className="container-wide">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '80px', alignItems: 'start' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '120px', alignItems: 'start' }}>
             <div>
               <span className="section-eyebrow">Overview</span>
-              <h2 style={{ marginTop: 0 }}>
+              <h2 style={{
+                marginTop: '16px',
+                marginBottom: 0,
+                fontSize: '48px'
+              }}>
                 Built for Testing
               </h2>
             </div>
             <div>
-              <p style={{ color: 'rgba(245,240,235,0.65)' }}>
+              <p style={{ color: 'rgba(245,240,235,0.65)', fontSize: '16px', lineHeight: '1.8' }}>
                 automation-exercise replaces legacy testing sandboxes with a complete, production-grade e-commerce platform.
                 Twelve products across five categories. Real shopping cart. Real form validation. Real checkout flow.
               </p>
-              <p style={{ color: 'rgba(245,240,235,0.65)' }}>
+              <p style={{ color: 'rgba(245,240,235,0.65)', fontSize: '16px', lineHeight: '1.8' }}>
                 Every interaction is authentic. Every validation is thorough. Every edge case is present.
               </p>
             </div>
