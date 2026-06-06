@@ -389,7 +389,6 @@ export default function ProductPage({ params }: ProductPageProps) {
                   style={{
                     flex: 1,
                     padding: '12px 24px',
-                    scrollMarginTop: '64px',
                     background: '#d4552a',
                     color: '#f5f0eb',
                     fontSize: '14px',
