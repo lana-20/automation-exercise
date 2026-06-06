@@ -579,25 +579,44 @@ export default function Home() {
                 fontFamily: 'JetBrains Mono, monospace',
                 fontSize: '12px',
                 color: '#d1ccc6',
-                lineHeight: '1.6'
+                lineHeight: '1.6',
+                marginBottom: 0
               }}>
-                Next.js 16 · TypeScript · React · Tailwind CSS
+                Next.js 16 · TypeScript · React · Inline CSS
+              </p>
+              <p style={{
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '11px',
+                color: '#a8a39d',
+                lineHeight: '1.6',
+                marginTop: '8px'
+              }}>
+                WCAG 2.1 AA/AAA Compliant
               </p>
             </div>
           </div>
 
           <div style={{
-            borderTop: '1px solid rgba(255,255,255,0.08)',
+            borderTop: '2px solid #d4a85a',
             paddingTop: '40px',
             textAlign: 'center'
           }}>
             <p style={{
               fontFamily: 'JetBrains Mono, monospace',
               fontSize: '12px',
-              color: 'rgba(245,240,235,0.38)',
-              letterSpacing: '0.1em'
+              color: '#d4a85a',
+              letterSpacing: '0.1em',
+              marginBottom: '12px'
             }}>
-              © 2024 automation-exercise. A testing sandbox.
+              © 2026 automation-exercise
+            </p>
+            <p style={{
+              fontFamily: 'JetBrains Mono, monospace',
+              fontSize: '11px',
+              color: '#a8a39d',
+              letterSpacing: '0.08em'
+            }}>
+              A production-grade e-commerce testing sandbox for automation engineers.
             </p>
           </div>
         </div>
