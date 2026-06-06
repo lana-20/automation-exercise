@@ -64,7 +64,7 @@ export default function ProductPage({ params }: ProductPageProps) {
       name: product.name,
       price: product.price,
       quantity: quantity,
-      image: product.category
+      image: categoryEmoji
     })
     setAddedToCart(true)
     setTimeout(() => setAddedToCart(false), 2000)

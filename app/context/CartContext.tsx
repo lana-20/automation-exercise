@@ -31,9 +31,22 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const saved = localStorage.getItem('cart')
     if (saved) {
       try {
-        setItems(JSON.parse(saved))
+        const parsed = JSON.parse(saved)
+        // Validate cart data - ensure quantities are reasonable
+        const validated = Array.isArray(parsed)
+          ? parsed.filter(item =>
+              item &&
+              item.productId &&
+              item.quantity &&
+              typeof item.quantity === 'number' &&
+              item.quantity > 0 &&
+              item.quantity <= 99
+            )
+          : []
+        setItems(validated)
       } catch (e) {
         console.error('Failed to load cart:', e)
+        localStorage.removeItem('cart')
       }
     }
     setMounted(true)
