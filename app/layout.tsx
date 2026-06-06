@@ -6,6 +6,7 @@ import { CartProvider } from './context/CartContext'
 export const metadata: Metadata = {
   title: 'automation-exercise | E-commerce Testing Sandbox',
   description: 'Test e-commerce workflows with a fully functional testing sandbox for automation testing education.',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
 }
 
 export default function RootLayout({
