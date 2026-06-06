@@ -1,0 +1,170 @@
+[
+  {
+    "id": "prod_001",
+    "name": "Wireless Headphones",
+    "category": "Electronics",
+    "price": 79.99,
+    "stock": 15,
+    "image": "/images/headphones.jpg",
+    "description": "Premium wireless headphones with noise cancellation and 30-hour battery life.",
+    "specs": {
+      "weight": "0.5 lbs",
+      "colors": ["Black", "Silver", "Gold"],
+      "warranty": "1 year"
+    }
+  },
+  {
+    "id": "prod_002",
+    "name": "Blue Cotton T-Shirt",
+    "category": "Apparel",
+    "price": 24.99,
+    "stock": 50,
+    "image": "/images/tshirt.jpg",
+    "description": "Comfortable 100% cotton t-shirt, perfect for everyday wear.",
+    "specs": {
+      "material": "100% Cotton",
+      "sizes": ["XS", "S", "M", "L", "XL", "XXL"],
+      "colors": ["Blue", "White", "Black"]
+    }
+  },
+  {
+    "id": "prod_003",
+    "name": "Desk Lamp",
+    "category": "Home",
+    "price": 39.99,
+    "stock": 20,
+    "image": "/images/lamp.jpg",
+    "description": "LED desk lamp with adjustable brightness and USB charging port.",
+    "specs": {
+      "power": "USB-powered",
+      "brightness": "3 levels",
+      "color_temp": "Warm/Cool White"
+    }
+  },
+  {
+    "id": "prod_004",
+    "name": "Python Programming Book",
+    "category": "Books",
+    "price": 34.99,
+    "stock": 30,
+    "image": "/images/python-book.jpg",
+    "description": "Comprehensive guide to Python programming for beginners and intermediate learners.",
+    "specs": {
+      "pages": 450,
+      "author": "Tech Publishing Co.",
+      "isbn": "978-1-234567-89-0"
+    }
+  },
+  {
+    "id": "prod_005",
+    "name": "USB-C Cable 6ft",
+    "category": "Electronics",
+    "price": 12.99,
+    "stock": 100,
+    "image": "/images/usbc-cable.jpg",
+    "description": "High-speed USB-C cable, 6 feet long, supports fast charging.",
+    "specs": {
+      "length": "6 feet",
+      "data_speed": "480 Mbps",
+      "max_current": "3A"
+    }
+  },
+  {
+    "id": "prod_006",
+    "name": "Running Shoes",
+    "category": "Apparel",
+    "price": 89.99,
+    "stock": 25,
+    "image": "/images/running-shoes.jpg",
+    "description": "Professional running shoes with advanced cushioning technology.",
+    "specs": {
+      "material": "Mesh + Rubber",
+      "sizes": ["6", "7", "8", "9", "10", "11", "12", "13"],
+      "weight_per_pair": "0.7 lbs"
+    }
+  },
+  {
+    "id": "prod_007",
+    "name": "Coffee Maker",
+    "category": "Home",
+    "price": 49.99,
+    "stock": 12,
+    "image": "/images/coffee-maker.jpg",
+    "description": "12-cup programmable coffee maker with thermal carafe.",
+    "specs": {
+      "capacity": "12 cups",
+      "power": "1000W",
+      "programmable": true
+    }
+  },
+  {
+    "id": "prod_008",
+    "name": "Yoga Mat",
+    "category": "Home",
+    "price": 19.99,
+    "stock": 40,
+    "image": "/images/yoga-mat.jpg",
+    "description": "Non-slip yoga mat with carrying strap, 68 inches long.",
+    "specs": {
+      "length": "68 inches",
+      "thickness": "0.25 inches",
+      "material": "TPE Foam"
+    }
+  },
+  {
+    "id": "prod_009",
+    "name": "Laptop Stand",
+    "category": "Electronics",
+    "price": 29.99,
+    "stock": 18,
+    "image": "/images/laptop-stand.jpg",
+    "description": "Adjustable aluminum laptop stand, supports up to 17 inch laptops.",
+    "specs": {
+      "material": "Aluminum",
+      "max_laptop_size": "17 inches",
+      "adjustable_height": true
+    }
+  },
+  {
+    "id": "prod_010",
+    "name": "Winter Jacket",
+    "category": "Apparel",
+    "price": 129.99,
+    "stock": 8,
+    "image": "/images/jacket.jpg",
+    "description": "Waterproof winter jacket with insulated lining.",
+    "specs": {
+      "material": "Polyester + Down Insulation",
+      "waterproof": true,
+      "sizes": ["XS", "S", "M", "L", "XL"]
+    }
+  },
+  {
+    "id": "prod_011",
+    "name": "Cookbook: Italian Recipes",
+    "category": "Books",
+    "price": 28.99,
+    "stock": 35,
+    "image": "/images/cookbook.jpg",
+    "description": "Collection of authentic Italian recipes with step-by-step instructions.",
+    "specs": {
+      "pages": 320,
+      "recipes": 75,
+      "author": "Chef Maria Rossi"
+    }
+  },
+  {
+    "id": "prod_012",
+    "name": "Desk Organizer",
+    "category": "Home",
+    "price": 15.99,
+    "stock": 60,
+    "image": "/images/organizer.jpg",
+    "description": "Wooden desk organizer with 5 compartments for pens, papers, and supplies.",
+    "specs": {
+      "material": "Bamboo",
+      "compartments": 5,
+      "dimensions": "12\" × 8\" × 4\""
+    }
+  }
+]
