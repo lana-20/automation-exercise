@@ -6,6 +6,9 @@
   --card: #13243a;
   --card-dark: #0d1e30;
   --off-white: #f5f0eb;
+  --text-primary: #f5f0eb;
+  --text-secondary: #d1ccc6;
+  --text-tertiary: #a8a39d;
   --coral: #d4552a;
   --coral-light: #e8785a;
   --coral-dark: #a83e1e;
@@ -19,8 +22,8 @@
   --steel-light: #7298d4;
   --border: rgba(255,255,255,0.08);
   --border-mid: rgba(255,255,255,0.14);
-  --fg-2: rgba(245,240,235,0.65);
-  --fg-3: rgba(245,240,235,0.38);
+  --fg-2: #d1ccc6;
+  --fg-3: #a8a39d;
   --font-display: 'Playfair Display', Georgia, serif;
   --font-body: 'Inter', -apple-system, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;

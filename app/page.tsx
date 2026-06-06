@@ -35,7 +35,7 @@ export default function Home() {
             fontSize: '18px',
             lineHeight: '1.8',
             maxWidth: '70ch',
-            color: 'rgba(245,240,235,0.65)',
+            color: '#d1ccc6',
             marginBottom: '56px',
             fontFamily: 'Inter, sans-serif'
           }}>
@@ -75,11 +75,11 @@ export default function Home() {
               </h2>
             </div>
             <div>
-              <p style={{ color: 'rgba(245,240,235,0.65)', fontSize: '16px', lineHeight: '1.8' }}>
+              <p style={{ color: '#d1ccc6', fontSize: '16px', lineHeight: '1.8' }}>
                 automation-exercise replaces legacy testing sandboxes with a complete, production-grade e-commerce platform.
                 Twelve products across five categories. Real shopping cart. Real form validation. Real checkout flow.
               </p>
-              <p style={{ color: 'rgba(245,240,235,0.65)', fontSize: '16px', lineHeight: '1.8' }}>
+              <p style={{ color: '#d1ccc6', fontSize: '16px', lineHeight: '1.8' }}>
                 Every interaction is authentic. Every validation is thorough. Every edge case is present.
               </p>
             </div>
@@ -144,7 +144,7 @@ export default function Home() {
                 <p style={{
                   marginBottom: 0,
                   fontSize: '14px',
-                  color: 'rgba(245,240,235,0.65)'
+                  color: '#d1ccc6'
                 }}>
                   {item.desc}
                 </p>
@@ -229,13 +229,13 @@ export default function Home() {
             <h2 style={{ marginTop: 0 }}>
               The Complete Journey
             </h2>
-            <p style={{ color: 'rgba(245,240,235,0.65)', marginBottom: '16px' }}>
+            <p style={{ color: '#d1ccc6', marginBottom: '16px' }}>
               Search for products by name. Filter by category. Sort by price. Add items to your cart.
             </p>
-            <p style={{ color: 'rgba(245,240,235,0.65)', marginBottom: '16px' }}>
+            <p style={{ color: '#d1ccc6', marginBottom: '16px' }}>
               Review your order. Proceed to checkout. Fill out the form with validation. Submit your order.
             </p>
-            <p style={{ color: 'rgba(245,240,235,0.65)' }}>
+            <p style={{ color: '#d1ccc6' }}>
               Receive order confirmation with summary. Everything you'd expect from a production e-commerce system.
             </p>
           </div>
@@ -264,7 +264,7 @@ export default function Home() {
           <p style={{
             fontSize: '16px',
             lineHeight: '1.8',
-            color: 'rgba(245,240,235,0.65)',
+            color: '#d1ccc6',
             maxWidth: '65ch',
             marginLeft: 'auto',
             marginRight: 'auto',
@@ -317,12 +317,12 @@ export default function Home() {
                   <a href="/products" style={{
                     fontFamily: 'Inter, sans-serif',
                     fontSize: '14px',
-                    color: 'rgba(245,240,235,0.65)',
+                    color: '#d1ccc6',
                     textDecoration: 'none',
                     transition: 'color 150ms'
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.color = '#f5f0eb'}
-                  onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(245,240,235,0.65)'}>
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#d1ccc6'}>
                     Products
                   </a>
                 </li>
@@ -330,12 +330,12 @@ export default function Home() {
                   <a href="/cart" style={{
                     fontFamily: 'Inter, sans-serif',
                     fontSize: '14px',
-                    color: 'rgba(245,240,235,0.65)',
+                    color: '#d1ccc6',
                     textDecoration: 'none',
                     transition: 'color 150ms'
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.color = '#f5f0eb'}
-                  onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(245,240,235,0.65)'}>
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#d1ccc6'}>
                     Cart
                   </a>
                 </li>
@@ -343,12 +343,12 @@ export default function Home() {
                   <a href="/checkout" style={{
                     fontFamily: 'Inter, sans-serif',
                     fontSize: '14px',
-                    color: 'rgba(245,240,235,0.65)',
+                    color: '#d1ccc6',
                     textDecoration: 'none',
                     transition: 'color 150ms'
                   }}
                   onMouseEnter={(e) => e.currentTarget.style.color = '#f5f0eb'}
-                  onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(245,240,235,0.65)'}>
+                  onMouseLeave={(e) => e.currentTarget.style.color = '#d1ccc6'}>
                     Checkout
                   </a>
                 </li>
@@ -370,7 +370,7 @@ export default function Home() {
               <p style={{
                 fontFamily: 'Inter, sans-serif',
                 fontSize: '14px',
-                color: 'rgba(245,240,235,0.65)',
+                color: '#d1ccc6',
                 lineHeight: '1.6'
               }}>
                 A professional e-commerce testing platform built for automation engineers.
@@ -392,7 +392,7 @@ export default function Home() {
               <p style={{
                 fontFamily: 'JetBrains Mono, monospace',
                 fontSize: '12px',
-                color: 'rgba(245,240,235,0.65)',
+                color: '#d1ccc6',
                 lineHeight: '1.6'
               }}>
                 Next.js 16 · TypeScript · React · Tailwind CSS
@@ -408,7 +408,7 @@ export default function Home() {
             <p style={{
               fontFamily: 'JetBrains Mono, monospace',
               fontSize: '12px',
-              color: 'rgba(245,240,235,0.38)',
+              color: '#a8a39d',
               letterSpacing: '0.1em'
             }}>
               © 2024 automation-exercise. A testing sandbox.

@@ -55,13 +55,13 @@ export default function Header() {
           fontSize: '14px'
         }}>
           <Link href="/products" style={{
-            color: 'rgba(245,240,235,0.65)',
+            color: '#d1ccc6',
             textDecoration: 'none',
             fontFamily: 'Inter, sans-serif',
             transition: 'color 150ms'
           }}
           onMouseEnter={(e) => e.currentTarget.style.color = '#f5f0eb'}
-          onMouseLeave={(e) => e.currentTarget.style.color = 'rgba(245,240,235,0.65)'}>
+          onMouseLeave={(e) => e.currentTarget.style.color = '#d1ccc6'}>
             Products
           </Link>
         </nav>

@@ -69,7 +69,7 @@ export default function ProductsPage() {
           </h1>
           <p style={{
             fontSize: '16px',
-            color: 'rgba(245,240,235,0.65)',
+            color: '#d1ccc6',
             marginBottom: 0
           }}>
             Browse our collection of {products.length} products
@@ -101,7 +101,7 @@ export default function ProductsPage() {
                 fontWeight: '600',
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
-                color: 'rgba(245,240,235,0.65)',
+                color: '#d1ccc6',
                 display: 'block',
                 marginBottom: '8px'
               }}>
@@ -142,7 +142,7 @@ export default function ProductsPage() {
                 fontWeight: '600',
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
-                color: 'rgba(245,240,235,0.65)',
+                color: '#d1ccc6',
                 display: 'block',
                 marginBottom: '8px'
               }}>
@@ -180,7 +180,7 @@ export default function ProductsPage() {
                 fontWeight: '600',
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
-                color: 'rgba(245,240,235,0.65)',
+                color: '#d1ccc6',
                 display: 'block',
                 marginBottom: '8px'
               }}>
@@ -230,7 +230,7 @@ export default function ProductsPage() {
               <div style={{
                 marginBottom: '40px',
                 fontSize: '14px',
-                color: 'rgba(245,240,235,0.65)'
+                color: '#d1ccc6'
               }}>
                 Showing <strong style={{ color: '#f5f0eb' }}>{filtered.length}</strong> of <strong style={{ color: '#f5f0eb' }}>{products.length}</strong> products
               </div>
@@ -275,7 +275,7 @@ export default function ProductsPage() {
                           fontWeight: '600',
                           letterSpacing: '0.1em',
                           textTransform: 'uppercase',
-                          color: 'rgba(245,240,235,0.38)',
+                          color: '#a8a39d',
                           marginBottom: '8px'
                         }}>
                           {product.category}
@@ -309,7 +309,7 @@ export default function ProductsPage() {
                           </span>
                           <span style={{
                             fontSize: '12px',
-                            color: 'rgba(245,240,235,0.38)'
+                            color: '#a8a39d'
                           }}>
                             ({parseInt(product.id.slice(-3)) * 2 + 50})
                           </span>
@@ -358,7 +358,7 @@ export default function ProductsPage() {
               </h2>
               <p style={{
                 fontSize: '14px',
-                color: 'rgba(245,240,235,0.65)'
+                color: '#d1ccc6'
               }}>
                 Try adjusting your search or filters
               </p>
