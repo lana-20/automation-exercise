@@ -34,39 +34,37 @@ export default function ProductCard({ product }: { product: Product }) {
 
   return (
     <div className="card-interactive group">
-      {/* Image */}
-      <div className="aspect-square bg-gradient-to-br from-dlb-bg-dark to-dlb-bg flex items-center justify-center overflow-hidden relative">
-        <div className="absolute inset-0 bg-gradient-to-t from-dlb-bg/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-        <div className="text-dlb-off-white/20 text-sm font-semibold">📷</div>
+      {/* Image Container */}
+      <div className="relative w-full h-64 bg-gradient-to-br from-gray-100 to-gray-50 flex items-center justify-center rounded-t-lg overflow-hidden">
+        <div className="text-5xl">📦</div>
+        <div className="absolute top-3 right-3">
+          <span className="badge badge-primary">{product.category}</span>
+        </div>
       </div>
 
-      <div className="p-6">
-        {/* Category Badge */}
-        <div className="inline-block badge badge-coral mb-3">
-          {product.category}
-        </div>
-
-        {/* Product Name */}
+      {/* Product Info */}
+      <div className="p-5">
+        {/* Name */}
         <Link href={`/products/${product.id}`} className="block group/name">
-          <h3 className="font-semibold text-lg line-clamp-2 group-hover/name:text-dlb-coral transition-colors duration-200 mb-2">
+          <h3 className="font-bold text-gray-900 line-clamp-2 group-hover/name:text-blue-600 transition text-sm mb-2">
             {product.name}
           </h3>
         </Link>
 
         {/* Stock Status */}
-        <div className="mb-4">
+        <div className="mb-3">
           {product.stock > 0 ? (
-            <p className="text-sm text-dlb-mint font-medium">
-              ✓ {product.stock} in stock
+            <p className="text-xs font-medium text-green-600">
+              ✓ In Stock ({product.stock})
             </p>
           ) : (
-            <p className="text-sm text-red-400 font-medium">Out of stock</p>
+            <p className="text-xs font-medium text-red-600">Out of Stock</p>
           )}
         </div>
 
         {/* Price */}
-        <div className="mb-6 pb-6 border-b border-white/10">
-          <p className="text-3xl font-bold text-gradient">
+        <div className="mb-4 pb-4 border-b border-gray-200">
+          <p className="text-2xl font-bold text-blue-600">
             ${product.price.toFixed(2)}
           </p>
         </div>
@@ -74,8 +72,8 @@ export default function ProductCard({ product }: { product: Product }) {
         {/* Quantity & Button */}
         <div className="space-y-3">
           <div>
-            <label className="text-xs font-semibold text-dlb-off-white/70 block mb-2">
-              Quantity
+            <label className="text-xs font-semibold text-gray-700 block mb-2">
+              Qty
             </label>
             <input
               type="number"
@@ -88,21 +86,21 @@ export default function ProductCard({ product }: { product: Product }) {
                 )
               }
               disabled={product.stock <= 0}
-              className="input text-sm"
+              className="input text-sm w-full"
             />
           </div>
           <button
             onClick={handleAddToCart}
             disabled={product.stock <= 0}
-            className={`w-full py-3 rounded-lg font-semibold transition-all duration-200 ${
+            className={`w-full py-2.5 rounded-lg font-semibold text-sm transition ${
               product.stock <= 0
-                ? 'bg-dlb-off-white/10 text-dlb-off-white/40 cursor-not-allowed'
+                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                 : isAdded
-                ? 'bg-gradient-to-r from-dlb-mint to-dlb-mint/80 text-dlb-bg shadow-lg shadow-dlb-mint/20'
-                : 'bg-gradient-to-r from-dlb-coral to-dlb-coral-light text-white shadow-lg shadow-dlb-coral/20 hover:shadow-dlb-coral/40 hover:scale-105'
+                ? 'bg-green-600 text-white'
+                : 'btn-add-cart'
             }`}
           >
-            {isAdded ? '✓ Added to cart!' : product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
+            {isAdded ? '✓ Added!' : product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
           </button>
         </div>
       </div>

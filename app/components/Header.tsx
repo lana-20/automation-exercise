@@ -7,39 +7,39 @@ export default function Header() {
   const { itemCount } = useCart()
 
   return (
-    <header className="bg-dlb-card/50 backdrop-blur-md border-b border-white/5 sticky top-0 z-50">
+    <header className="bg-white border-b border-gray-200 sticky top-0 z-50 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-        <Link href="/" className="group flex items-center gap-2 hover:opacity-90 transition-opacity">
-          <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-dlb-coral to-dlb-coral-light flex items-center justify-center font-bold text-white shadow-glow">
+        <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition">
+          <div className="w-10 h-10 rounded bg-blue-600 flex items-center justify-center font-bold text-white text-lg">
             AE
           </div>
           <div>
-            <div className="font-display text-lg font-bold leading-tight">
-              automation-<span className="text-dlb-coral">exercise</span>
+            <div className="font-bold text-gray-900 text-lg">
+              Automation Exercise
             </div>
-            <div className="text-xs text-dlb-off-white/50">E-commerce Testing</div>
+            <div className="text-xs text-gray-500">Testing Practice</div>
           </div>
         </Link>
 
-        <nav className="flex items-center gap-8">
+        <nav className="flex items-center gap-6">
           <Link
             href="/"
-            className="text-dlb-off-white/70 hover:text-dlb-coral transition-colors duration-200 font-medium text-sm"
+            className="text-gray-700 hover:text-blue-600 font-medium transition text-sm"
           >
             Home
           </Link>
           <Link
             href="/products"
-            className="text-dlb-off-white/70 hover:text-dlb-coral transition-colors duration-200 font-medium text-sm"
+            className="text-gray-700 hover:text-blue-600 font-medium transition text-sm"
           >
             Products
           </Link>
-          <Link href="/cart" className="group">
-            <div className="flex items-center gap-2 bg-gradient-to-r from-dlb-coral to-dlb-coral-light hover:from-dlb-coral-light hover:to-dlb-coral px-6 py-2.5 rounded-lg font-semibold text-white transition-all duration-200 shadow-lg shadow-dlb-coral/20 group-hover:shadow-dlb-coral/40 group-hover:scale-105">
+          <Link href="/cart" className="relative">
+            <div className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition text-sm">
               <span>🛒</span>
               <span>Cart</span>
               {itemCount > 0 && (
-                <span className="flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full bg-white/20 text-xs font-bold backdrop-blur">
+                <span className="flex items-center justify-center w-6 h-6 rounded-full bg-white text-blue-600 text-xs font-bold ml-1">
                   {itemCount}
                 </span>
               )}

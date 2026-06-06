@@ -3,107 +3,159 @@ import ProductGrid from './components/ProductGrid'
 
 export default function Home() {
   return (
-    <main>
+    <main className="bg-gray-50">
       {/* Hero Section */}
-      <section className="relative overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-br from-dlb-coral/10 via-transparent to-dlb-mint/5" />
-
-        <div className="relative max-w-7xl mx-auto px-6 py-20 lg:py-32 text-center">
-          <div className="mb-8 animate-fade-in">
-            <div className="inline-block badge badge-coral mb-6">
-              🚀 E-commerce Testing Sandbox
-            </div>
-          </div>
-
-          <h1 className="font-display text-5xl lg:text-6xl font-bold mb-6 leading-tight">
-            Welcome to <span className="text-gradient">automation-exercise</span>
-          </h1>
-
-          <p className="text-lg text-dlb-off-white/70 mb-8 max-w-2xl mx-auto leading-relaxed">
-            A fully functional e-commerce testing sandbox designed for automation testing education and benchmarking. Test real-world workflows with a complete product catalog, cart management, and checkout flow.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Link
-              href="/products"
-              className="btn btn-primary group inline-flex items-center justify-center gap-2"
-            >
-              <span>Start Shopping</span>
-              <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </Link>
-            <Link
-              href="/products?category=all"
-              className="btn btn-secondary inline-flex items-center justify-center"
-            >
-              Browse All Products
-            </Link>
-          </div>
-
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-8 mt-16 pt-16 border-t border-white/10">
-            <div>
-              <p className="text-3xl font-bold text-dlb-coral">12</p>
-              <p className="text-sm text-dlb-off-white/60 mt-2">Products</p>
-            </div>
-            <div>
-              <p className="text-3xl font-bold text-dlb-coral">5</p>
-              <p className="text-sm text-dlb-off-white/60 mt-2">Categories</p>
-            </div>
-            <div>
-              <p className="text-3xl font-bold text-dlb-coral">∞</p>
-              <p className="text-sm text-dlb-off-white/60 mt-2">Test Cases</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Products Section */}
-      <section className="py-20">
+      <section className="bg-white border-b border-gray-200 py-12">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-12">
-            <div className="inline-block badge badge-mint mb-4">Featured</div>
-            <h2 className="font-display text-4xl font-bold">Popular Products</h2>
-            <p className="text-dlb-off-white/60 mt-3">
-              Explore our best-selling items and test real e-commerce workflows
+          <div className="max-w-2xl">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">
+              Automation Exercise
+            </h1>
+            <p className="text-lg text-gray-700 mb-2">
+              A fully functional e-commerce testing sandbox designed for automation testing education and practice.
             </p>
+            <p className="text-gray-600 mb-8">
+              Test real-world workflows including product browsing, search, filtering, shopping cart management, and checkout with complete form validation.
+            </p>
+
+            <div className="flex gap-3">
+              <Link
+                href="/products"
+                className="btn btn-primary"
+              >
+                View Products
+              </Link>
+              <Link
+                href="/products"
+                className="btn btn-secondary"
+              >
+                Browse All
+              </Link>
+            </div>
           </div>
-          <ProductGrid />
         </div>
       </section>
 
       {/* Features Section */}
-      <section className="py-20 border-t border-white/10">
+      <section className="py-12 bg-white border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="mb-12">
-            <h2 className="font-display text-4xl font-bold">Why automation-exercise?</h2>
-          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">Features</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {[
-              {
-                icon: '🛍️',
-                title: 'Complete E-commerce Flow',
-                desc: 'Browse, search, filter, add to cart, and checkout with real validation'
-              },
-              {
-                icon: '✓',
-                title: 'Validation & Error Handling',
-                desc: 'Test form validation, error messages, and edge cases'
-              },
-              {
-                icon: '📊',
-                title: 'Realistic Test Data',
-                desc: '12 products across 5 categories with varying stock levels'
-              }
-            ].map((feature, idx) => (
-              <div key={idx} className="card p-8">
-                <div className="text-4xl mb-4">{feature.icon}</div>
-                <h3 className="font-semibold text-lg mb-3">{feature.title}</h3>
-                <p className="text-dlb-off-white/60">{feature.desc}</p>
-              </div>
-            ))}
+            <div className="card p-6">
+              <div className="text-3xl mb-3">🛍️</div>
+              <h3 className="font-bold text-gray-900 mb-2">Product Catalog</h3>
+              <p className="text-gray-600 text-sm">
+                12 products across 5 categories with realistic pricing and stock levels.
+              </p>
+            </div>
+
+            <div className="card p-6">
+              <div className="text-3xl mb-3">🔍</div>
+              <h3 className="font-bold text-gray-900 mb-2">Search & Filter</h3>
+              <p className="text-gray-600 text-sm">
+                Search by name, filter by category, and sort by price or popularity.
+              </p>
+            </div>
+
+            <div className="card p-6">
+              <div className="text-3xl mb-3">✓</div>
+              <h3 className="font-bold text-gray-900 mb-2">Form Validation</h3>
+              <p className="text-gray-600 text-sm">
+                Complete checkout flow with comprehensive form validation and error handling.
+              </p>
+            </div>
           </div>
+        </div>
+      </section>
+
+      {/* Products Section */}
+      <section className="py-12">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">Featured Products</h2>
+          <ProductGrid />
+        </div>
+      </section>
+
+      {/* Testing Benefits Section */}
+      <section className="py-12 bg-white border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-2xl font-bold text-gray-900 mb-8">Why Use Automation Exercise?</h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="card p-6">
+              <h3 className="font-bold text-gray-900 mb-3">📊 Complete Test Scenarios</h3>
+              <ul className="text-gray-600 text-sm space-y-2">
+                <li>• Happy path workflows (browse → add → checkout)</li>
+                <li>• Edge cases (stock limits, form boundaries)</li>
+                <li>• Negative scenarios (validation errors)</li>
+                <li>• Real-world e-commerce logic</li>
+              </ul>
+            </div>
+
+            <div className="card p-6">
+              <h3 className="font-bold text-gray-900 mb-3">🎯 Learning & Benchmarking</h3>
+              <ul className="text-gray-600 text-sm space-y-2">
+                <li>• Practice automation testing techniques</li>
+                <li>• Learn test data handling</li>
+                <li>• Benchmark test automation tools</li>
+                <li>• Measure test execution metrics</li>
+              </ul>
+            </div>
+
+            <div className="card p-6">
+              <h3 className="font-bold text-gray-900 mb-3">🛠️ Testing Challenges</h3>
+              <ul className="text-gray-600 text-sm space-y-2">
+                <li>• Form validation testing</li>
+                <li>• Dynamic element interaction</li>
+                <li>• State management verification</li>
+                <li>• Error message validation</li>
+              </ul>
+            </div>
+
+            <div className="card p-6">
+              <h3 className="font-bold text-gray-900 mb-3">⚙️ Real Application Flow</h3>
+              <ul className="text-gray-600 text-sm space-y-2">
+                <li>• Realistic product data</li>
+                <li>• Stock inventory management</li>
+                <li>• Price calculation with tax</li>
+                <li>• Shipping method selection</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Quick Stats */}
+      <section className="py-12 bg-blue-50 border-t border-blue-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid grid-cols-3 gap-8 text-center">
+            <div>
+              <p className="text-4xl font-bold text-blue-600">12</p>
+              <p className="text-gray-700 font-medium mt-2">Products</p>
+            </div>
+            <div>
+              <p className="text-4xl font-bold text-blue-600">5</p>
+              <p className="text-gray-700 font-medium mt-2">Categories</p>
+            </div>
+            <div>
+              <p className="text-4xl font-bold text-blue-600">∞</p>
+              <p className="text-gray-700 font-medium mt-2">Test Cases</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-12 bg-white border-t border-gray-200">
+        <div className="max-w-7xl mx-auto px-6 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Ready to Test?</h2>
+          <p className="text-gray-600 mb-8 max-w-md mx-auto">
+            Start exploring the e-commerce flow and practice your automation testing skills.
+          </p>
+          <Link href="/products" className="btn btn-primary inline-block">
+            Get Started
+          </Link>
         </div>
       </section>
     </main>
