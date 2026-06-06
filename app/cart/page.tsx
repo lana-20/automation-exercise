@@ -2,13 +2,23 @@
 
 import Link from 'next/link'
 import { useCart } from '@/app/context/CartContext'
+import products from '@/data/products.json'
 
 export default function CartPage() {
   const { items, removeItem, updateQuantity, clearCart, itemCount } = useCart()
 
+  // Get product stock levels
+  const getProductStock = (productId: string) => {
+    const product = products.find(p => p.id === productId)
+    return product?.stock || 0
+  }
+
+  // Check for oversold items
+  const oversoldItems = items.filter(item => item.quantity > getProductStock(item.productId))
+
   const cart = items
-  const tax = cart.length > 0 ? items.reduce((sum, item) => sum + (item.price * item.quantity), 0) * 0.1 : 0
   const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+  const tax = subtotal * 0.1
   const shipping = subtotal > 100 ? 0 : 9.99
   const total = subtotal + tax + shipping
 
@@ -105,6 +115,34 @@ export default function CartPage() {
           paddingRight: '80px',
           boxSizing: 'border-box'
         }}>
+          {/* Stock Warning */}
+          {oversoldItems.length > 0 && (
+            <div style={{
+              background: 'rgba(212, 85, 42, 0.15)',
+              border: '1px solid rgba(212, 85, 42, 0.3)',
+              borderRadius: '6px',
+              padding: '16px',
+              marginBottom: '32px'
+            }}>
+              <p style={{
+                color: '#d4552a',
+                fontWeight: '600',
+                fontSize: '14px',
+                marginBottom: '8px',
+                marginTop: 0
+              }}>
+                ⚠ Stock Limit Alert
+              </p>
+              <p style={{
+                color: '#d4552a',
+                fontSize: '13px',
+                marginBottom: 0
+              }}>
+                {oversoldItems.map(item => `${item.name}: ${item.quantity} in cart, only ${getProductStock(item.productId)} available`).join('. ')}. Please adjust quantities before checkout.
+              </p>
+            </div>
+          )}
+
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 320px', gap: '60px' }}>
             {/* Items */}
             <div>
@@ -124,116 +162,141 @@ export default function CartPage() {
               </div>
 
               <div style={{ display: 'flex', flexDirection: 'column', gap: '24px' }}>
-                {cart.map((item) => (
-                  <div key={item.productId} style={{
-                    display: 'grid',
-                    gridTemplateColumns: '80px 1fr',
-                    gap: '24px',
-                    paddingBottom: '24px',
-                    borderBottom: '1px solid rgba(255,255,255,0.08)'
-                  }}>
-                    {/* Image */}
-                    <div style={{
-                      width: '80px',
-                      height: '80px',
-                      background: 'rgba(19,36,58,0.5)',
-                      borderRadius: '6px',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      fontSize: '32px'
+                {cart.map((item) => {
+                  const stock = getProductStock(item.productId)
+                  const isOverstock = item.quantity > stock
+                  return (
+                    <div key={item.productId} style={{
+                      display: 'grid',
+                      gridTemplateColumns: '80px 1fr',
+                      gap: '24px',
+                      paddingBottom: '24px',
+                      borderBottom: '1px solid rgba(255,255,255,0.08)',
+                      opacity: isOverstock ? 0.7 : 1
                     }}>
-                      {item.image}
-                    </div>
-
-                    {/* Details */}
-                    <div>
-                      <h3 style={{
-                        fontSize: '18px',
-                        fontFamily: 'Playfair Display, serif',
-                        fontWeight: '500',
-                        color: '#f5f0eb',
-                        marginBottom: '8px',
-                        marginTop: 0
-                      }}>
-                        {item.name}
-                      </h3>
-
+                      {/* Image */}
                       <div style={{
-                        display: 'grid',
-                        gridTemplateColumns: '1fr 1fr',
-                        gap: '32px',
+                        width: '80px',
+                        height: '80px',
+                        background: 'rgba(19,36,58,0.5)',
+                        borderRadius: '6px',
+                        display: 'flex',
                         alignItems: 'center',
-                        marginBottom: '12px'
+                        justifyContent: 'center',
+                        fontSize: '32px',
+                        border: isOverstock ? '2px solid rgba(212, 85, 42, 0.5)' : 'none'
                       }}>
-                        {/* Price */}
-                        <div>
-                          <p style={{ color: '#a8a39d', fontSize: '12px', marginBottom: '4px' }}>Price</p>
-                          <p style={{ color: '#d4552a', fontSize: '18px', fontWeight: '600', marginBottom: 0 }}>
-                            ${item.price.toFixed(2)}
-                          </p>
-                        </div>
-
-                        {/* Quantity */}
-                        <div>
-                          <p style={{ color: '#a8a39d', fontSize: '12px', marginBottom: '4px' }}>Quantity</p>
-                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                            <button
-                              onClick={() => updateQuantity(item.productId, item.quantity - 1)}
-                              style={{
-                                background: 'none',
-                                border: '1px solid rgba(255,255,255,0.08)',
-                                color: '#f5f0eb',
-                                padding: '4px 8px',
-                                borderRadius: '4px',
-                                cursor: 'pointer',
-                                fontSize: '12px',
-                                fontWeight: '600'
-                              }}
-                            >
-                              −
-                            </button>
-                            <span style={{ color: '#f5f0eb', minWidth: '24px', textAlign: 'center' }}>
-                              {item.quantity}
-                            </span>
-                            <button
-                              onClick={() => updateQuantity(item.productId, item.quantity + 1)}
-                              style={{
-                                background: 'none',
-                                border: '1px solid rgba(255,255,255,0.08)',
-                                color: '#f5f0eb',
-                                padding: '4px 8px',
-                                borderRadius: '4px',
-                                cursor: 'pointer',
-                                fontSize: '12px',
-                                fontWeight: '600'
-                              }}
-                            >
-                              +
-                            </button>
-                          </div>
-                        </div>
+                        {item.image}
                       </div>
 
-                      {/* Remove */}
-                      <button
-                        onClick={() => removeItem(item.productId)}
-                        style={{
-                          background: 'none',
-                          border: 'none',
-                          color: '#a8a39d',
-                          fontSize: '12px',
-                          cursor: 'pointer',
-                          padding: 0,
-                          textDecoration: 'underline',
-                          fontFamily: 'Inter, sans-serif'
-                        }}
-                      >
-                        Remove
-                      </button>
+                      {/* Details */}
+                      <div>
+                        <h3 style={{
+                          fontSize: '18px',
+                          fontFamily: 'Playfair Display, serif',
+                          fontWeight: '500',
+                          color: '#f5f0eb',
+                          marginBottom: '8px',
+                          marginTop: 0
+                        }}>
+                          {item.name}
+                        </h3>
+
+                        <div style={{
+                          display: 'grid',
+                          gridTemplateColumns: '1fr 1fr',
+                          gap: '32px',
+                          alignItems: 'center',
+                          marginBottom: '12px'
+                        }}>
+                          {/* Price */}
+                          <div>
+                            <p style={{ color: '#a8a39d', fontSize: '12px', marginBottom: '4px' }}>Price</p>
+                            <p style={{ color: '#d4552a', fontSize: '18px', fontWeight: '600', marginBottom: 0 }}>
+                              ${item.price.toFixed(2)}
+                            </p>
+                          </div>
+
+                          {/* Quantity */}
+                          <div>
+                            <p style={{ color: '#a8a39d', fontSize: '12px', marginBottom: '4px' }}>
+                              Quantity (max: {stock})
+                            </p>
+                            <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                              <button
+                                onClick={() => updateQuantity(item.productId, item.quantity - 1)}
+                                style={{
+                                  background: 'none',
+                                  border: '1px solid rgba(255,255,255,0.08)',
+                                  color: '#f5f0eb',
+                                  padding: '4px 8px',
+                                  borderRadius: '4px',
+                                  cursor: 'pointer',
+                                  fontSize: '12px',
+                                  fontWeight: '600'
+                                }}
+                              >
+                                −
+                              </button>
+                              <span style={{
+                                color: isOverstock ? '#d4552a' : '#f5f0eb',
+                                minWidth: '24px',
+                                textAlign: 'center',
+                                fontWeight: isOverstock ? '600' : 'normal'
+                              }}>
+                                {item.quantity}
+                              </span>
+                              <button
+                                onClick={() => updateQuantity(item.productId, item.quantity + 1)}
+                                disabled={item.quantity >= stock}
+                                style={{
+                                  background: 'none',
+                                  border: '1px solid rgba(255,255,255,0.08)',
+                                  color: '#f5f0eb',
+                                  padding: '4px 8px',
+                                  borderRadius: '4px',
+                                  cursor: item.quantity >= stock ? 'not-allowed' : 'pointer',
+                                  fontSize: '12px',
+                                  fontWeight: '600',
+                                  opacity: item.quantity >= stock ? 0.5 : 1
+                                }}
+                              >
+                                +
+                              </button>
+                            </div>
+                            {isOverstock && (
+                              <p style={{
+                                color: '#d4552a',
+                                fontSize: '11px',
+                                marginTop: '4px',
+                                marginBottom: 0
+                              }}>
+                                ⚠ Exceeds available stock
+                              </p>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Remove */}
+                        <button
+                          onClick={() => removeItem(item.productId)}
+                          style={{
+                            background: 'none',
+                            border: 'none',
+                            color: '#a8a39d',
+                            fontSize: '12px',
+                            cursor: 'pointer',
+                            padding: 0,
+                            textDecoration: 'underline',
+                            fontFamily: 'Inter, sans-serif'
+                          }}
+                        >
+                          Remove
+                        </button>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                })}
               </div>
 
               {/* Clear Cart Button */}
@@ -319,12 +382,17 @@ export default function CartPage() {
               </div>
 
               <Link
-                href="/checkout"
+                href={oversoldItems.length > 0 ? '#' : '/checkout'}
+                onClick={(e) => {
+                  if (oversoldItems.length > 0) {
+                    e.preventDefault()
+                  }
+                }}
                 style={{
                   display: 'block',
                   width: '100%',
                   padding: '12px 24px',
-                  background: '#d4552a',
+                  background: oversoldItems.length > 0 ? '#888' : '#d4552a',
                   color: '#f5f0eb',
                   fontSize: '14px',
                   fontWeight: '600',
@@ -332,14 +400,23 @@ export default function CartPage() {
                   borderRadius: '4px',
                   textAlign: 'center',
                   textDecoration: 'none',
-                  cursor: 'pointer',
+                  cursor: oversoldItems.length > 0 ? 'not-allowed' : 'pointer',
                   marginBottom: '12px',
-                  transition: 'background 150ms'
+                  transition: 'background 150ms',
+                  opacity: oversoldItems.length > 0 ? 0.6 : 1
                 }}
-                onMouseEnter={(e) => e.currentTarget.style.background = '#e8785a'}
-                onMouseLeave={(e) => e.currentTarget.style.background = '#d4552a'}
+                onMouseEnter={(e) => {
+                  if (oversoldItems.length === 0) {
+                    e.currentTarget.style.background = '#e8785a'
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  if (oversoldItems.length === 0) {
+                    e.currentTarget.style.background = '#d4552a'
+                  }
+                }}
               >
-                Proceed to Checkout
+                {oversoldItems.length > 0 ? 'Fix Stock Issues First' : 'Proceed to Checkout'}
               </Link>
 
               <Link
