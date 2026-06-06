@@ -1,113 +1,289 @@
 'use client'
 
-import { useState, use } from 'react'
+import { useState } from 'react'
 import Link from 'next/link'
-import products from '@/data/products.json'
 import { useCart } from '@/app/context/CartContext'
+import products from '@/data/products.json'
 
-export default function ProductPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params)
-  const product = products.find(p => p.id === id)
-  const { addItem } = useCart()
+interface ProductPageProps {
+  params: Promise<{ id: string }>
+}
+
+export default function ProductPage({ params }: ProductPageProps) {
+  const resolvedParams = params
   const [quantity, setQuantity] = useState(1)
-  const [added, setAdded] = useState(false)
+  const [addedToCart, setAddedToCart] = useState(false)
+  const { addToCart } = useCart()
+
+  // Get product from static data based on route param
+  const product = products.find((p) => p.id === resolvedParams.id)
 
   if (!product) {
     return (
-      <main className="max-w-7xl mx-auto px-6 py-12">
-        <p className="text-dlb-off-white/70">Product not found</p>
-        <Link href="/products" className="text-dlb-coral hover:underline">
-          ← Back to Products
-        </Link>
+      <main style={{ backgroundColor: 'var(--ae-bg)', minHeight: '100vh' }}>
+        <div className="container-wide" style={{ paddingTop: '48px', paddingBottom: '48px', textAlign: 'center' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--ae-ink)', marginBottom: '16px' }}>
+            Product Not Found
+          </h1>
+          <p style={{ fontSize: '16px', color: 'var(--ae-ink3)', marginBottom: '24px' }}>
+            The product you're looking for doesn't exist.
+          </p>
+          <Link href="/products" style={{ color: 'var(--ae-blue)', fontWeight: '700', textDecoration: 'none' }}>
+            Back to Products
+          </Link>
+        </div>
       </main>
     )
   }
 
   const handleAddToCart = () => {
-    if (product.stock <= 0) {
-      alert('Out of stock')
-      return
+    for (let i = 0; i < quantity; i++) {
+      addToCart(product)
     }
-    addItem({
-      productId: product.id,
-      name: product.name,
-      price: product.price,
-      quantity,
-      image: product.image,
-    })
-    setAdded(true)
-    setTimeout(() => setAdded(false), 2000)
+    setAddedToCart(true)
+    setTimeout(() => setAddedToCart(false), 2000)
   }
 
+  const categoryEmoji = {
+    Electronics: '💻',
+    Apparel: '👕',
+    Home: '🏠',
+    Books: '📚',
+  }[product.category] || '📦'
+
+  const reviewCount = parseInt(product.id.slice(-3)) * 2 + 50
+
   return (
-    <main className="max-w-7xl mx-auto px-6 py-8">
-      <Link href="/products" className="text-dlb-coral hover:underline mb-8 inline-block">
-        ← Back to Products
-      </Link>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* Product Image */}
-        <div className="bg-dlb-card border border-white/10 rounded-lg aspect-square flex items-center justify-center">
-          <div className="text-dlb-off-white/30 text-lg">Product Image</div>
+    <main style={{ backgroundColor: 'var(--ae-bg)', minHeight: '100vh' }}>
+      <section style={{ backgroundColor: 'var(--ae-white)', borderBottom: '1px solid var(--ae-line)' }}>
+        <div className="container-wide" style={{ paddingTop: '24px', paddingBottom: '24px' }}>
+          <Link
+            href="/products"
+            style={{
+              color: 'var(--ae-blue)',
+              fontWeight: '700',
+              textDecoration: 'none',
+              fontSize: '14px',
+              marginBottom: '16px',
+              display: 'inline-block',
+            }}
+          >
+            ← Back to Products
+          </Link>
         </div>
+      </section>
 
-        {/* Product Details */}
-        <div>
-          <div className="text-sm text-dlb-coral mb-2">{product.category}</div>
-          <h1 className="font-display text-4xl mb-4">{product.name}</h1>
-
-          <div className="mb-6">
-            <p className="text-2xl text-dlb-coral font-bold">${product.price.toFixed(2)}</p>
-            <p className={`text-sm mt-2 ${product.stock > 0 ? 'text-dlb-mint' : 'text-red-500'}`}>
-              {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
-            </p>
-          </div>
-
-          <p className="text-dlb-off-white/70 mb-6">{product.description}</p>
-
-          <div className="bg-dlb-card border border-white/10 rounded-lg p-6 mb-6">
-            <h3 className="font-semibold mb-4">Specifications</h3>
-            <dl className="space-y-2 text-sm">
-              {Object.entries(product.specs).map(([key, value]: [string, any]) => (
-                <div key={key} className="flex justify-between">
-                  <dt className="text-dlb-off-white/70 capitalize">{key.replace(/_/g, ' ')}:</dt>
-                  <dd className="font-semibold">
-                    {Array.isArray(value) ? value.join(', ') : String(value)}
-                  </dd>
-                </div>
-              ))}
-            </dl>
-          </div>
-
-          {/* Add to Cart */}
-          <div className="space-y-4">
+      <section style={{ paddingTop: '48px', paddingBottom: '48px' }}>
+        <div className="container-wide">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '48px' }}>
+            {/* Product Image */}
             <div>
-              <label className="block text-sm mb-2">Quantity</label>
-              <input
-                type="number"
-                min="1"
-                max={product.stock || 99}
-                value={quantity}
-                onChange={(e) => setQuantity(Math.max(1, Math.min(99, parseInt(e.target.value) || 1)))}
-                className="w-full px-4 py-2 bg-dlb-bg border border-white/10 rounded"
-              />
+              <div
+                style={{
+                  height: '400px',
+                  background: '#f3f4f6',
+                  borderRadius: '12px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  fontSize: '120px',
+                  marginBottom: '24px',
+                  border: '1px solid var(--ae-line)',
+                }}
+              >
+                {categoryEmoji}
+              </div>
+              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
+                {[1, 2, 3, 4].map((i) => (
+                  <div
+                    key={i}
+                    style={{
+                      height: '80px',
+                      background: '#f3f4f6',
+                      borderRadius: '8px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '36px',
+                      border: '1px solid var(--ae-line)',
+                      cursor: 'pointer',
+                    }}
+                  >
+                    {categoryEmoji}
+                  </div>
+                ))}
+              </div>
             </div>
-            <button
-              onClick={handleAddToCart}
-              disabled={product.stock <= 0}
-              className={`w-full py-3 rounded font-semibold transition ${
-                product.stock <= 0
-                  ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
-                  : added
-                  ? 'bg-dlb-mint text-dlb-bg'
-                  : 'bg-dlb-coral hover:bg-dlb-coral-light'
-              }`}
-            >
-              {added ? '✓ Added to Cart!' : product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
-            </button>
+
+            {/* Product Info */}
+            <div>
+              <div style={{ marginBottom: '16px' }}>
+                <span
+                  style={{
+                    fontSize: '11px',
+                    fontWeight: '500',
+                    color: 'var(--ae-ink3)',
+                    background: '#f3f4f6',
+                    padding: '4px 10px',
+                    borderRadius: '999px',
+                  }}
+                >
+                  {product.category}
+                </span>
+              </div>
+
+              <h1 style={{ fontSize: '32px', fontWeight: '700', color: 'var(--ae-ink)', marginBottom: '16px', lineHeight: '1.2' }}>
+                {product.name}
+              </h1>
+
+              {/* Rating */}
+              <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '24px' }}>
+                <span style={{ color: 'var(--ae-amber-d)', fontSize: '18px', letterSpacing: '1px' }}>
+                  ★★★★☆
+                </span>
+                <span style={{ fontSize: '14px', color: 'var(--ae-ink3)' }}>
+                  ({reviewCount}) reviews
+                </span>
+              </div>
+
+              {/* Price */}
+              <div
+                style={{
+                  fontSize: '36px',
+                  fontWeight: '700',
+                  color: 'var(--ae-red)',
+                  marginBottom: '24px',
+                }}
+              >
+                ${product.price.toFixed(2)}
+              </div>
+
+              {/* Description */}
+              <p
+                style={{
+                  fontSize: '16px',
+                  color: 'var(--ae-ink2)',
+                  lineHeight: '1.6',
+                  marginBottom: '24px',
+                }}
+              >
+                {product.description}
+              </p>
+
+              {/* Specs */}
+              <div style={{ marginBottom: '32px' }}>
+                <h3 style={{ fontSize: '14px', fontWeight: '700', color: 'var(--ae-ink)', marginBottom: '12px' }}>
+                  Specifications
+                </h3>
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '16px' }}>
+                  {Object.entries(product.specs || {}).map(([key, value]) => (
+                    <div key={key}>
+                      <p style={{ fontSize: '12px', fontWeight: '600', color: 'var(--ae-ink3)', marginBottom: '4px' }}>
+                        {key.replace(/_/g, ' ').toUpperCase()}
+                      </p>
+                      <p style={{ fontSize: '14px', color: 'var(--ae-ink)', lineHeight: '1.4' }}>
+                        {Array.isArray(value) ? value.join(', ') : String(value)}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Stock Status */}
+              <div
+                style={{
+                  padding: '12px 16px',
+                  borderRadius: '8px',
+                  background: product.stock > 10 ? '#ecfdf5' : product.stock > 0 ? '#fef3c7' : '#fee2e2',
+                  marginBottom: '24px',
+                }}
+              >
+                <p
+                  style={{
+                    fontSize: '14px',
+                    fontWeight: '600',
+                    color:
+                      product.stock > 10
+                        ? 'var(--ae-green)'
+                        : product.stock > 0
+                          ? '#b45309'
+                          : '#dc2626',
+                  }}
+                >
+                  {product.stock > 0
+                    ? product.stock > 10
+                      ? `In Stock (${product.stock} available)`
+                      : `Low Stock (${product.stock} remaining)`
+                    : 'Out of Stock'}
+                </p>
+              </div>
+
+              {/* Add to Cart */}
+              <div style={{ display: 'flex', gap: '12px', alignItems: 'flex-end' }}>
+                <div style={{ flex: 1 }}>
+                  <label style={{ fontSize: '12px', fontWeight: '700', color: 'var(--ae-ink3)', display: 'block', marginBottom: '6px' }}>
+                    QUANTITY
+                  </label>
+                  <select
+                    value={quantity}
+                    onChange={(e) => setQuantity(parseInt(e.target.value))}
+                    disabled={product.stock === 0}
+                    style={{
+                      width: '100%',
+                      padding: '10px 12px',
+                      fontSize: '14px',
+                      border: '1px solid var(--ae-line)',
+                      borderRadius: '6px',
+                      backgroundColor: 'var(--ae-white)',
+                      color: 'var(--ae-ink)',
+                      cursor: product.stock === 0 ? 'not-allowed' : 'pointer',
+                      opacity: product.stock === 0 ? 0.6 : 1,
+                    }}
+                  >
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                      <option key={num} value={num}>
+                        {num}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+                <button
+                  onClick={handleAddToCart}
+                  disabled={product.stock === 0}
+                  style={{
+                    flex: 1,
+                    padding: '12px 24px',
+                    fontSize: '16px',
+                    fontWeight: '700',
+                    borderRadius: '6px',
+                    border: 'none',
+                    cursor: product.stock === 0 ? 'not-allowed' : 'pointer',
+                    transition: 'all 0.2s',
+                    background: addedToCart
+                      ? 'var(--ae-green)'
+                      : product.stock === 0
+                        ? '#ccc'
+                        : 'var(--ae-amber)',
+                    color: addedToCart ? 'white' : product.stock === 0 ? '#666' : 'var(--ae-ink)',
+                  }}
+                  onMouseEnter={(e) => {
+                    if (product.stock > 0 && !addedToCart) {
+                      e.target.style.background = 'var(--ae-amber-d)'
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (product.stock > 0 && !addedToCart) {
+                      e.target.style.background = 'var(--ae-amber)'
+                    }
+                  }}
+                >
+                  {product.stock === 0 ? 'Out of Stock' : addedToCart ? '✓ Added to Cart' : 'Add to Cart'}
+                </button>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
   )
 }
