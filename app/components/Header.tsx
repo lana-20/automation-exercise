@@ -17,9 +17,9 @@ export default function Header() {
       padding: '16px 0'
     }}>
       <div style={{
-        maxWidth: '1280px',
+        maxWidth: '100%',
         margin: '0 auto',
-        padding: '0 48px',
+        padding: '0 80px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
