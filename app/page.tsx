@@ -90,7 +90,7 @@ export default function Home() {
           paddingRight: '80px',
           boxSizing: 'border-box'
         }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '120px', alignItems: 'start' }}>
+          <div className="grid-responsive" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'start' }}>
             <div>
               <span style={{
                 fontFamily: 'JetBrains Mono, monospace',
@@ -274,7 +274,7 @@ export default function Home() {
             Featured Products
           </h2>
 
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px', marginBottom: '60px' }}>
+          <div className="grid-responsive" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px', marginBottom: '60px' }}>
             {[
               { id: 'prod_001', icon: '💻', name: 'Wireless Headphones Pro', price: '$79.99' },
               { id: 'prod_002', icon: '👕', name: 'Premium T-Shirt', price: '$24.99' },
