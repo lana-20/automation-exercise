@@ -78,12 +78,15 @@ export default function ProductPage({ params }: ProductPageProps) {
   }[product.category] || '📦'
 
   const reviewCount = parseInt(product.id.slice(-3)) * 2 + 50
+  const accentColor = ['#4aa8a5', '#d4a85a', '#7455bf', '#3d6abf'][
+    parseInt(product.id.slice(-1)) % 4
+  ]
 
   return (
     <main style={{ background: '#0f1a2a', minHeight: '100vh' }}>
       {/* Header */}
       <section style={{
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
+        borderBottom: '3px solid #7455bf',
         paddingTop: '24px',
         paddingBottom: '24px'
       }}>
@@ -103,8 +106,11 @@ export default function ProductPage({ params }: ProductPageProps) {
               textDecoration: 'none',
               fontSize: '14px',
               marginBottom: '16px',
-              display: 'inline-block'
+              display: 'inline-block',
+              transition: 'color 150ms'
             }}
+            onMouseEnter={(e) => e.currentTarget.style.color = '#e8785a'}
+            onMouseLeave={(e) => e.currentTarget.style.color = '#d4552a'}
           >
             ← Back to Products
           </Link>
@@ -135,7 +141,16 @@ export default function ProductPage({ params }: ProductPageProps) {
                 alignItems: 'center',
                 justifyContent: 'center',
                 fontSize: '120px',
-                border: '1px solid rgba(255,255,255,0.08)'
+                border: `2px solid ${accentColor}`,
+                transition: 'all 150ms'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = 'rgba(19,36,58,0.8)'
+                e.currentTarget.style.boxShadow = `0 8px 24px ${accentColor}30`
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = 'rgba(19,36,58,0.5)'
+                e.currentTarget.style.boxShadow = 'none'
               }}>
                 {categoryEmoji}
               </div>
@@ -144,17 +159,19 @@ export default function ProductPage({ params }: ProductPageProps) {
             {/* Info */}
             <div>
               {/* Category */}
-              <div style={{ marginBottom: '20px' }}>
+              <div style={{ marginBottom: '24px' }}>
                 <span style={{
                   fontSize: '11px',
+                  fontFamily: 'JetBrains Mono, monospace',
                   fontWeight: '600',
                   letterSpacing: '0.1em',
                   textTransform: 'uppercase',
-                  color: '#d4552a',
-                  background: 'rgba(212, 85, 42, 0.1)',
+                  color: accentColor,
+                  background: `${accentColor}20`,
                   padding: '6px 12px',
                   borderRadius: '4px',
-                  display: 'inline-block'
+                  display: 'inline-block',
+                  border: `1px solid ${accentColor}`
                 }}>
                   {product.category}
                 </span>
@@ -200,8 +217,10 @@ export default function ProductPage({ params }: ProductPageProps) {
                 fontSize: '36px',
                 fontFamily: 'Playfair Display, serif',
                 fontWeight: '500',
-                color: '#d4552a',
-                marginBottom: '24px'
+                color: accentColor,
+                marginBottom: '24px',
+                paddingBottom: '24px',
+                borderBottom: `2px solid ${accentColor}`
               }}>
                 ${product.price.toFixed(2)}
               </div>
@@ -217,11 +236,11 @@ export default function ProductPage({ params }: ProductPageProps) {
               </p>
 
               {/* Specs */}
-              <div style={{ marginBottom: '32px' }}>
+              <div style={{ marginBottom: '32px', paddingBottom: '32px', borderBottom: `2px solid #3d6abf` }}>
                 <h3 style={{
-                  fontSize: '14px',
+                  fontSize: '12px',
                   fontWeight: '700',
-                  color: '#f5f0eb',
+                  color: '#3d6abf',
                   marginBottom: '16px',
                   marginTop: 0,
                   textTransform: 'uppercase',
@@ -236,7 +255,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                       <p style={{
                         fontSize: '11px',
                         fontWeight: '600',
-                        color: '#a8a39d',
+                        color: '#3d6abf',
                         marginBottom: '6px',
                         textTransform: 'uppercase',
                         letterSpacing: '0.1em',
@@ -266,7 +285,12 @@ export default function ProductPage({ params }: ProductPageProps) {
                   : product.stock > 0
                   ? 'rgba(180, 134, 42, 0.15)'
                   : 'rgba(212, 85, 42, 0.15)',
-                marginBottom: '32px'
+                marginBottom: '32px',
+                border: `1px solid ${product.stock > 10
+                  ? '#4aa8a5'
+                  : product.stock > 0
+                  ? '#d4a85a'
+                  : '#d4552a'}`
               }}>
                 <p style={{
                   fontSize: '14px',
@@ -288,17 +312,33 @@ export default function ProductPage({ params }: ProductPageProps) {
 
               {/* Quantity & Add to Cart */}
               <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', border: '1px solid rgba(255,255,255,0.08)', borderRadius: '4px' }}>
+                <fieldset style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  border: `2px solid ${accentColor}`,
+                  borderRadius: '4px',
+                  padding: 0,
+                  margin: 0
+                }}>
                   <button
                     onClick={() => setQuantity(Math.max(1, quantity - 1))}
                     style={{
                       background: 'none',
                       border: 'none',
-                      color: '#f5f0eb',
+                      color: accentColor,
                       fontSize: '18px',
                       padding: '8px 12px',
                       cursor: 'pointer',
-                      fontWeight: '600'
+                      fontWeight: '600',
+                      transition: 'all 150ms'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.background = accentColor
+                      e.currentTarget.style.color = '#0f1a2a'
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'none'
+                      e.currentTarget.style.color = accentColor
                     }}
                   >
                     −
@@ -306,10 +346,11 @@ export default function ProductPage({ params }: ProductPageProps) {
                   <span style={{
                     color: '#f5f0eb',
                     padding: '8px 12px',
-                    borderLeft: '1px solid rgba(255,255,255,0.08)',
-                    borderRight: '1px solid rgba(255,255,255,0.08)',
+                    borderLeft: `1px solid ${accentColor}`,
+                    borderRight: `1px solid ${accentColor}`,
                     minWidth: '40px',
-                    textAlign: 'center'
+                    textAlign: 'center',
+                    fontWeight: '600'
                   }}>
                     {quantity}
                   </span>
@@ -319,17 +360,28 @@ export default function ProductPage({ params }: ProductPageProps) {
                     style={{
                       background: 'none',
                       border: 'none',
-                      color: '#f5f0eb',
+                      color: accentColor,
                       fontSize: '18px',
                       padding: '8px 12px',
                       cursor: quantity >= product.stock ? 'not-allowed' : 'pointer',
                       fontWeight: '600',
-                      opacity: quantity >= product.stock ? 0.5 : 1
+                      opacity: quantity >= product.stock ? 0.4 : 1,
+                      transition: 'all 150ms'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (quantity < product.stock) {
+                        e.currentTarget.style.background = accentColor
+                        e.currentTarget.style.color = '#0f1a2a'
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.background = 'none'
+                      e.currentTarget.style.color = accentColor
                     }}
                   >
                     +
                   </button>
-                </div>
+                </fieldset>
 
                 <button
                   onClick={handleAddToCart}
@@ -344,11 +396,22 @@ export default function ProductPage({ params }: ProductPageProps) {
                     border: 'none',
                     borderRadius: '4px',
                     cursor: product.stock === 0 ? 'not-allowed' : 'pointer',
-                    transition: 'background 150ms',
-                    opacity: product.stock === 0 ? 0.5 : 1
+                    transition: 'all 150ms',
+                    opacity: product.stock === 0 ? 0.5 : 1,
+                    boxShadow: '0 4px 12px rgba(212, 85, 42, 0.3)'
                   }}
-                  onMouseEnter={(e) => e.currentTarget.style.background = '#e8785a'}
-                  onMouseLeave={(e) => e.currentTarget.style.background = '#d4552a'}
+                  onMouseEnter={(e) => {
+                    if (product.stock > 0) {
+                      e.currentTarget.style.background = '#e8785a'
+                      e.currentTarget.style.boxShadow = '0 8px 20px rgba(212, 85, 42, 0.5)'
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (product.stock > 0) {
+                      e.currentTarget.style.background = '#d4552a'
+                      e.currentTarget.style.boxShadow = '0 4px 12px rgba(212, 85, 42, 0.3)'
+                    }
+                  }}
                 >
                   {addedToCart ? '✓ Added to Cart' : 'Add to Cart'}
                 </button>

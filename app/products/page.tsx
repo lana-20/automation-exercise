@@ -40,6 +40,9 @@ export default function ProductsPage() {
     Books: '📚',
   }
 
+  const accentColors = ['#4aa8a5', '#d4a85a', '#7455bf', '#3d6abf']
+  const getAccentColor = (index: number) => accentColors[index % accentColors.length]
+
   return (
     <main style={{ background: '#0f1a2a', minHeight: '100vh' }}>
       {/* Header */}
@@ -47,7 +50,7 @@ export default function ProductsPage() {
         paddingTop: '60px',
         paddingBottom: '60px',
         background: '#0f1a2a',
-        borderBottom: '1px solid rgba(255,255,255,0.08)'
+        borderBottom: '3px solid #4aa8a5'
       }}>
         <div style={{
           width: '100%',
@@ -57,13 +60,28 @@ export default function ProductsPage() {
           paddingRight: '80px',
           boxSizing: 'border-box'
         }}>
+          <span style={{
+            fontSize: '11px',
+            fontFamily: 'JetBrains Mono, monospace',
+            fontWeight: '600',
+            textTransform: 'uppercase',
+            letterSpacing: '0.1em',
+            color: '#4aa8a5',
+            marginBottom: '16px',
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '8px'
+          }}>
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#4aa8a5' }}></span>
+            Catalog
+          </span>
           <h1 style={{
             fontSize: '56px',
             fontFamily: 'Playfair Display, serif',
             fontWeight: '500',
             color: '#f5f0eb',
             marginBottom: '8px',
-            marginTop: 0
+            marginTop: '16px'
           }}>
             All Products
           </h1>
@@ -82,7 +100,7 @@ export default function ProductsPage() {
         paddingTop: '40px',
         paddingBottom: '40px',
         background: '#0f1a2a',
-        borderBottom: '1px solid rgba(255,255,255,0.08)'
+        borderBottom: '2px solid #7455bf'
       }}>
         <div style={{
           width: '100%',
@@ -96,12 +114,12 @@ export default function ProductsPage() {
             {/* Search */}
             <div>
               <label style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '12px',
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '11px',
                 fontWeight: '600',
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
-                color: '#d1ccc6',
+                color: '#d4552a',
                 display: 'block',
                 marginBottom: '8px'
               }}>
@@ -114,22 +132,24 @@ export default function ProductsPage() {
                 onChange={(e) => setSearchQuery(e.target.value)}
                 style={{
                   width: '100%',
-                  padding: '10px 14px',
+                  padding: '12px 14px',
                   fontSize: '14px',
                   fontFamily: 'Inter, sans-serif',
                   background: 'rgba(19,36,58,0.5)',
-                  border: '1px solid rgba(255,255,255,0.08)',
+                  border: '2px solid #d4552a',
                   borderRadius: '4px',
                   color: '#f5f0eb',
                   transition: 'all 150ms'
                 }}
                 onFocus={(e) => {
-                  e.target.style.borderColor = '#d4552a'
-                  e.target.style.background = 'rgba(19,36,58,0.8)'
+                  e.currentTarget.style.borderColor = '#e8785a'
+                  e.currentTarget.style.background = 'rgba(19,36,58,0.8)'
+                  e.currentTarget.style.boxShadow = '0 0 0 3px rgba(212, 85, 42, 0.1)'
                 }}
                 onBlur={(e) => {
-                  e.target.style.borderColor = 'rgba(255,255,255,0.08)'
-                  e.target.style.background = 'rgba(19,36,58,0.5)'
+                  e.currentTarget.style.borderColor = '#d4552a'
+                  e.currentTarget.style.background = 'rgba(19,36,58,0.5)'
+                  e.currentTarget.style.boxShadow = 'none'
                 }}
               />
             </div>
@@ -137,12 +157,12 @@ export default function ProductsPage() {
             {/* Category */}
             <div>
               <label style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '12px',
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '11px',
                 fontWeight: '600',
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
-                color: '#d1ccc6',
+                color: '#7455bf',
                 display: 'block',
                 marginBottom: '8px'
               }}>
@@ -153,15 +173,23 @@ export default function ProductsPage() {
                 onChange={(e) => setSelectedCategory(e.target.value)}
                 style={{
                   width: '100%',
-                  padding: '10px 14px',
+                  padding: '12px 14px',
                   fontSize: '14px',
                   fontFamily: 'Inter, sans-serif',
                   background: 'rgba(19,36,58,0.5)',
-                  border: '1px solid rgba(255,255,255,0.08)',
+                  border: '2px solid #7455bf',
                   borderRadius: '4px',
                   color: '#f5f0eb',
                   transition: 'all 150ms',
                   cursor: 'pointer'
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = '#9e85d4'
+                  e.currentTarget.style.background = 'rgba(19,36,58,0.8)'
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = '#7455bf'
+                  e.currentTarget.style.background = 'rgba(19,36,58,0.5)'
                 }}
               >
                 {categories.map((cat) => (
@@ -175,12 +203,12 @@ export default function ProductsPage() {
             {/* Sort */}
             <div>
               <label style={{
-                fontFamily: 'Inter, sans-serif',
-                fontSize: '12px',
+                fontFamily: 'JetBrains Mono, monospace',
+                fontSize: '11px',
                 fontWeight: '600',
                 letterSpacing: '0.1em',
                 textTransform: 'uppercase',
-                color: '#d1ccc6',
+                color: '#d4a85a',
                 display: 'block',
                 marginBottom: '8px'
               }}>
@@ -191,15 +219,23 @@ export default function ProductsPage() {
                 onChange={(e) => setSortBy(e.target.value)}
                 style={{
                   width: '100%',
-                  padding: '10px 14px',
+                  padding: '12px 14px',
                   fontSize: '14px',
                   fontFamily: 'Inter, sans-serif',
                   background: 'rgba(19,36,58,0.5)',
-                  border: '1px solid rgba(255,255,255,0.08)',
+                  border: '2px solid #d4a85a',
                   borderRadius: '4px',
                   color: '#f5f0eb',
                   transition: 'all 150ms',
                   cursor: 'pointer'
+                }}
+                onFocus={(e) => {
+                  e.currentTarget.style.borderColor = '#e8c87a'
+                  e.currentTarget.style.background = 'rgba(19,36,58,0.8)'
+                }}
+                onBlur={(e) => {
+                  e.currentTarget.style.borderColor = '#d4a85a'
+                  e.currentTarget.style.background = 'rgba(19,36,58,0.5)'
                 }}
               >
                 <option value="popular" style={{ background: '#13243a', color: '#f5f0eb' }}>Popular</option>
@@ -229,139 +265,108 @@ export default function ProductsPage() {
             <>
               <div style={{
                 marginBottom: '40px',
-                fontSize: '14px',
-                color: '#d1ccc6'
+                fontSize: '13px',
+                fontFamily: 'JetBrains Mono, monospace',
+                color: '#d1ccc6',
+                textTransform: 'uppercase',
+                letterSpacing: '0.1em'
               }}>
-                Showing <strong style={{ color: '#f5f0eb' }}>{filtered.length}</strong> of <strong style={{ color: '#f5f0eb' }}>{products.length}</strong> products
+                Showing <strong style={{ color: '#d4a85a' }}>{filtered.length}</strong> of <strong style={{ color: '#d4a85a' }}>{products.length}</strong> products
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
-                {filtered.map((product) => (
-                  <Link key={product.id} href={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                    <div style={{
-                      background: '#13243a',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      borderRadius: '8px',
-                      overflow: 'hidden',
-                      transition: 'all 150ms',
-                      cursor: 'pointer'
-                    }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.borderColor = '#d4552a'
-                      e.currentTarget.style.background = '#0d1e30'
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'
-                      e.currentTarget.style.background = '#13243a'
-                    }}>
-                      {/* Product Image */}
-                      <div style={{
-                        height: '200px',
+                {filtered.map((product, index) => {
+                  const accentColor = getAccentColor(index)
+                  return (
+                    <Link key={product.id} href={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                      <article style={{
                         background: 'rgba(19,36,58,0.5)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        fontSize: '64px',
-                        borderBottom: '1px solid rgba(255,255,255,0.08)'
+                        border: `2px solid ${accentColor}`,
+                        borderRadius: '8px',
+                        overflow: 'hidden',
+                        transition: 'all 150ms',
+                        cursor: 'pointer'
+                      }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.background = 'rgba(19,36,58,0.8)'
+                        e.currentTarget.style.boxShadow = `0 8px 24px ${accentColor}30`
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.background = 'rgba(19,36,58,0.5)'
+                        e.currentTarget.style.boxShadow = 'none'
                       }}>
-                        {categoryEmoji[product.category] || '📦'}
-                      </div>
-
-                      {/* Product Info */}
-                      <div style={{ padding: '20px' }}>
                         <div style={{
-                          fontSize: '11px',
-                          fontFamily: 'JetBrains Mono, monospace',
-                          fontWeight: '600',
-                          letterSpacing: '0.1em',
-                          textTransform: 'uppercase',
-                          color: '#a8a39d',
-                          marginBottom: '8px'
-                        }}>
-                          {product.category}
-                        </div>
-
-                        <h3 style={{
-                          fontSize: '16px',
-                          fontFamily: 'Playfair Display, serif',
-                          fontWeight: '500',
-                          color: '#f5f0eb',
-                          marginBottom: '12px',
-                          marginTop: 0,
-                          lineHeight: '1.3'
-                        }}>
-                          {product.name}
-                        </h3>
-
-                        {/* Rating */}
-                        <div style={{
+                          height: '200px',
+                          background: 'rgba(13,30,48,0.5)',
                           display: 'flex',
                           alignItems: 'center',
-                          gap: '8px',
-                          marginBottom: '12px'
+                          justifyContent: 'center',
+                          fontSize: '80px',
+                          borderBottom: `2px solid ${accentColor}`
                         }}>
-                          <span style={{
-                            color: '#d4a85a',
-                            fontSize: '12px',
-                            letterSpacing: '0.5px'
-                          }}>
-                            ★★★★☆
-                          </span>
-                          <span style={{
-                            fontSize: '12px',
-                            color: '#a8a39d'
-                          }}>
-                            ({parseInt(product.id.slice(-3)) * 2 + 50})
-                          </span>
+                          {categoryEmoji[product.category as keyof typeof categoryEmoji] || '📦'}
                         </div>
 
-                        {/* Price */}
-                        <div style={{
-                          fontSize: '20px',
-                          fontFamily: 'Playfair Display, serif',
-                          fontWeight: '500',
-                          color: '#d4552a',
-                          marginBottom: '12px'
-                        }}>
-                          ${product.price.toFixed(2)}
-                        </div>
+                        <div style={{ padding: '24px' }}>
+                          <div style={{
+                            fontSize: '11px',
+                            fontFamily: 'JetBrains Mono, monospace',
+                            fontWeight: '600',
+                            textTransform: 'uppercase',
+                            letterSpacing: '0.1em',
+                            color: accentColor,
+                            marginBottom: '12px'
+                          }}>
+                            {product.category}
+                          </div>
 
-                        {/* Stock Status */}
-                        <div style={{
-                          fontSize: '12px',
-                          fontWeight: '600',
-                          color: product.stock > 10 ? '#4aa8a5' : product.stock > 0 ? '#d4a85a' : '#d4552a'
-                        }}>
-                          {product.stock > 0
-                            ? product.stock > 10
-                              ? '✓ In Stock'
-                              : `⚠ Only ${product.stock} left`
-                            : '✗ Out of Stock'}
+                          <h3 style={{
+                            fontSize: '18px',
+                            fontFamily: 'Playfair Display, serif',
+                            fontWeight: '500',
+                            color: '#f5f0eb',
+                            marginBottom: '16px',
+                            marginTop: 0,
+                            lineHeight: '1.4'
+                          }}>
+                            {product.name}
+                          </h3>
+
+                          <div style={{
+                            fontSize: '20px',
+                            fontFamily: 'Playfair Display, serif',
+                            fontWeight: '500',
+                            color: accentColor,
+                            marginBottom: '12px'
+                          }}>
+                            ${product.price.toFixed(2)}
+                          </div>
+
+                          <div style={{
+                            fontSize: '12px',
+                            color: product.stock > 10 ? '#4aa8a5' : product.stock > 0 ? '#d4a85a' : '#d4552a',
+                            fontWeight: '600',
+                            padding: '6px 10px',
+                            background: product.stock > 10 
+                              ? 'rgba(74, 168, 165, 0.15)' 
+                              : product.stock > 0 
+                              ? 'rgba(212, 170, 90, 0.15)' 
+                              : 'rgba(212, 85, 42, 0.15)',
+                            borderRadius: '3px',
+                            display: 'inline-block'
+                          }}>
+                            {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                  </Link>
-                ))}
+                      </article>
+                    </Link>
+                  )
+                })}
               </div>
             </>
           ) : (
             <div style={{ textAlign: 'center', paddingTop: '60px', paddingBottom: '60px' }}>
-              <div style={{ fontSize: '48px', marginBottom: '16px' }}>🔍</div>
-              <h2 style={{
-                fontSize: '28px',
-                fontFamily: 'Playfair Display, serif',
-                fontWeight: '500',
-                color: '#f5f0eb',
-                marginBottom: '8px'
-              }}>
-                No products found
-              </h2>
-              <p style={{
-                fontSize: '14px',
-                color: '#d1ccc6'
-              }}>
-                Try adjusting your search or filters
-              </p>
+              <p style={{ color: '#d1ccc6', fontSize: '16px' }}>No products found matching your criteria.</p>
             </div>
           )}
         </div>
