@@ -33,47 +33,76 @@ export default function ProductCard({ product }: { product: Product }) {
   }
 
   return (
-    <div className="bg-dlb-card border border-white/10 rounded-lg overflow-hidden hover:border-dlb-coral/30 transition">
-      <div className="aspect-square bg-dlb-bg-dark flex items-center justify-center">
-        <div className="text-dlb-off-white/30 text-sm">Image</div>
+    <div className="card-interactive group">
+      {/* Image */}
+      <div className="aspect-square bg-gradient-to-br from-dlb-bg-dark to-dlb-bg flex items-center justify-center overflow-hidden relative">
+        <div className="absolute inset-0 bg-gradient-to-t from-dlb-bg/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        <div className="text-dlb-off-white/20 text-sm font-semibold">📷</div>
       </div>
 
-      <div className="p-4">
-        <div className="text-xs text-dlb-coral mb-2">{product.category}</div>
-        <Link href={`/products/${product.id}`}>
-          <h3 className="font-semibold hover:text-dlb-coral transition line-clamp-2">
+      <div className="p-6">
+        {/* Category Badge */}
+        <div className="inline-block badge badge-coral mb-3">
+          {product.category}
+        </div>
+
+        {/* Product Name */}
+        <Link href={`/products/${product.id}`} className="block group/name">
+          <h3 className="font-semibold text-lg line-clamp-2 group-hover/name:text-dlb-coral transition-colors duration-200 mb-2">
             {product.name}
           </h3>
         </Link>
 
-        <div className="flex justify-between items-center mt-3">
-          <div className="text-dlb-coral font-bold">${product.price.toFixed(2)}</div>
-          <div className="text-xs text-dlb-off-white/50">
-            {product.stock > 0 ? `${product.stock} in stock` : 'Out of stock'}
-          </div>
+        {/* Stock Status */}
+        <div className="mb-4">
+          {product.stock > 0 ? (
+            <p className="text-sm text-dlb-mint font-medium">
+              ✓ {product.stock} in stock
+            </p>
+          ) : (
+            <p className="text-sm text-red-400 font-medium">Out of stock</p>
+          )}
         </div>
 
-        <div className="mt-4 space-y-2">
-          <input
-            type="number"
-            min="1"
-            max={product.stock || 99}
-            value={quantity}
-            onChange={(e) => setQuantity(Math.max(1, Math.min(99, parseInt(e.target.value) || 1)))}
-            className="w-full px-2 py-1 bg-dlb-bg border border-white/10 rounded text-sm"
-          />
+        {/* Price */}
+        <div className="mb-6 pb-6 border-b border-white/10">
+          <p className="text-3xl font-bold text-gradient">
+            ${product.price.toFixed(2)}
+          </p>
+        </div>
+
+        {/* Quantity & Button */}
+        <div className="space-y-3">
+          <div>
+            <label className="text-xs font-semibold text-dlb-off-white/70 block mb-2">
+              Quantity
+            </label>
+            <input
+              type="number"
+              min="1"
+              max={product.stock || 99}
+              value={quantity}
+              onChange={(e) =>
+                setQuantity(
+                  Math.max(1, Math.min(99, parseInt(e.target.value) || 1))
+                )
+              }
+              disabled={product.stock <= 0}
+              className="input text-sm"
+            />
+          </div>
           <button
             onClick={handleAddToCart}
             disabled={product.stock <= 0}
-            className={`w-full py-2 rounded font-semibold transition ${
+            className={`w-full py-3 rounded-lg font-semibold transition-all duration-200 ${
               product.stock <= 0
-                ? 'bg-gray-600 text-gray-400 cursor-not-allowed'
+                ? 'bg-dlb-off-white/10 text-dlb-off-white/40 cursor-not-allowed'
                 : isAdded
-                ? 'bg-dlb-mint text-dlb-bg'
-                : 'bg-dlb-coral hover:bg-dlb-coral-light'
+                ? 'bg-gradient-to-r from-dlb-mint to-dlb-mint/80 text-dlb-bg shadow-lg shadow-dlb-mint/20'
+                : 'bg-gradient-to-r from-dlb-coral to-dlb-coral-light text-white shadow-lg shadow-dlb-coral/20 hover:shadow-dlb-coral/40 hover:scale-105'
             }`}
           >
-            {isAdded ? '✓ Added!' : product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
+            {isAdded ? '✓ Added to cart!' : product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
           </button>
         </div>
       </div>
