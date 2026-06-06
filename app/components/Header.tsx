@@ -2,121 +2,88 @@
 
 import Link from 'next/link'
 import { useCart } from '@/app/context/CartContext'
-import { useState } from 'react'
 
 export default function Header() {
   const { itemCount } = useCart()
-  const [hbgOpen, setHbgOpen] = useState(false)
 
   return (
-    <>
-      <nav className="sticky top-0 z-50 border-b border-white/8 bg-black/40 backdrop-blur-md">
-        <div className="container">
-          <div className="flex items-center justify-between py-4">
-            <Link href="/" className="flex items-center gap-3 hover:opacity-90 transition">
-              <div className="w-11 h-11 rounded-lg bg-gradient-to-br from-coral to-coral-light flex items-center justify-center font-bold text-white text-sm animate-pulse">
-                AE
-              </div>
-              <div>
-                <div className="font-display font-medium text-lg text-off-white">
-                  <em className="not-italic">automation-</em><em className="italic text-coral">exercise</em>
-                </div>
-                <div className="font-mono text-10px tracking-widest uppercase text-fg-3">Testing Sandbox</div>
-              </div>
-            </Link>
+    <div className="navbar bg-base-100 shadow-md sticky top-0 z-50">
+      <div className="flex-1">
+        <Link href="/" className="btn btn-ghost text-xl font-bold">
+          <span className="bg-gradient-to-r from-blue-500 to-blue-600 px-3 py-1 rounded text-white">
+            AE
+          </span>
+          <span>
+            automation<span className="text-blue-500">exercise</span>
+          </span>
+        </Link>
+      </div>
 
-            <div className="flex items-center gap-8">
-              <Link href="/" className="hidden sm:block text-fg-2 hover:text-coral transition font-medium text-sm">
-                Home
-              </Link>
-              <Link href="/products" className="hidden sm:block text-fg-2 hover:text-coral transition font-medium text-sm">
-                Products
-              </Link>
-              <Link href="/cart" className="flex items-center gap-2 bg-coral hover:bg-coral-light px-6 py-2.5 rounded-lg font-semibold text-white transition-all shadow-lg hover:shadow-xl">
-                <span>🛒</span>
-                <span>Cart</span>
-                {itemCount > 0 && (
-                  <span className="flex items-center justify-center min-w-5 h-5 rounded-full bg-white/20 text-xs font-bold">
-                    {itemCount}
-                  </span>
-                )}
-              </Link>
-
-              <button
-                onClick={() => setHbgOpen(true)}
-                className="sm:hidden flex flex-col gap-1.5 p-1 cursor-pointer"
-                aria-label="Open navigation"
-              >
-                <span className="block w-6 h-0.5 bg-fg-2 transition"></span>
-                <span className="block w-4 h-0.5 bg-fg-2 transition"></span>
-                <span className="block w-6 h-0.5 bg-fg-2 transition"></span>
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mobile Menu Overlay */}
-      <div
-        className={`fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity ${
-          hbgOpen ? 'opacity-100' : 'pointer-events-none opacity-0'
-        }`}
-        onClick={() => setHbgOpen(false)}
-      />
-
-      {/* Mobile Menu Panel */}
-      <aside
-        className={`fixed top-0 right-0 w-72 h-screen bg-card border-l border-border-mid z-50 overflow-y-auto transition-transform ${
-          hbgOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
-      >
-        <div className="flex items-center justify-between p-6 border-b border-border">
-          <div className="font-display text-sm">
-            <em className="not-italic">automation-</em><em className="italic text-coral">exercise</em>
-          </div>
-          <button
-            onClick={() => setHbgOpen(false)}
-            className="text-fg-3 hover:text-off-white transition text-xl"
+      <div className="flex-none gap-2 hidden md:flex">
+        <nav className="flex gap-4">
+          <Link href="/" className="btn btn-ghost">
+            Home
+          </Link>
+          <Link href="/products" className="btn btn-ghost">
+            Products
+          </Link>
+        </nav>
+        <Link href="/cart" className="btn btn-primary gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
-            ✕
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"
+            />
+          </svg>
+          Cart
+          {itemCount > 0 && (
+            <span className="badge badge-primary">{itemCount}</span>
+          )}
+        </Link>
+      </div>
+
+      {/* Mobile Menu */}
+      <div className="flex-none gap-2 md:hidden">
+        <div className="dropdown dropdown-end">
+          <button className="btn btn-ghost btn-circle" aria-label="Menu">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4 6h16M4 12h8m-8 6h16"
+              />
+            </svg>
           </button>
+          <ul className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52">
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            <li>
+              <Link href="/products">Products</Link>
+            </li>
+            <li>
+              <Link href="/cart">
+                Cart {itemCount > 0 && <span className="badge">{itemCount}</span>}
+              </Link>
+            </li>
+          </ul>
         </div>
-
-        <div className="p-6 space-y-6">
-          <div>
-            <Link href="/" className="block font-display text-base text-off-white hover:text-coral transition">
-              Home
-            </Link>
-          </div>
-
-          <div>
-            <div className="font-mono text-10px tracking-widest uppercase text-fg-3 mb-3 pb-2 border-b border-border">
-              Navigation
-            </div>
-            <Link href="/" className="block text-fg-2 hover:text-coral transition py-2 text-sm">
-              Home
-            </Link>
-            <Link href="/products" className="block text-fg-2 hover:text-coral transition py-2 text-sm">
-              Products
-            </Link>
-            <Link href="/cart" className="block text-fg-2 hover:text-coral transition py-2 text-sm">
-              Cart
-            </Link>
-          </div>
-
-          <div>
-            <div className="font-mono text-10px tracking-widest uppercase text-fg-3 mb-3 pb-2 border-b border-border">
-              Getting Started
-            </div>
-            <a href="#features" className="block text-fg-2 hover:text-coral transition py-2 text-sm">
-              Why Use It?
-            </a>
-            <a href="#benefits" className="block text-fg-2 hover:text-coral transition py-2 text-sm">
-              Benefits
-            </a>
-          </div>
-        </div>
-      </aside>
-    </>
+      </div>
+    </div>
   )
 }

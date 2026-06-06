@@ -7,18 +7,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        'dlb-bg': '#0f1a2a',
-        'dlb-bg-dark': '#0a1220',
-        'dlb-card': '#13243a',
-        'dlb-off-white': '#f5f0eb',
-        'dlb-coral': '#d4552a',
-        'dlb-coral-light': '#e8785a',
-        'dlb-mint': '#4aa8a5',
-      },
-      fontFamily: {
-        display: ['Playfair Display', 'Georgia', 'serif'],
-        body: ['Inter', '-apple-system', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        primary: '#3b82f6',
+        'primary-dark': '#1e40af',
+        secondary: '#10b981',
+        accent: '#f59e0b',
       },
     },
   },

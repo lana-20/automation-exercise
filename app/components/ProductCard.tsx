@@ -30,72 +30,78 @@ export default function ProductCard({ product }: { product: Product }) {
   }
 
   return (
-    <div className="card-interactive group p-0 overflow-hidden">
+    <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
       {/* Image */}
-      <div className="relative w-full h-56 bg-gradient-to-br from-card-dark to-bg-dark flex items-center justify-center overflow-hidden">
-        <div className="text-4xl">📦</div>
-        <div className="absolute top-3 right-3">
-          <span className="badge badge-coral">{product.category}</span>
-        </div>
-      </div>
+      <figure className="bg-gradient-to-br from-base-200 to-base-300 h-48 flex items-center justify-center">
+        <span className="text-5xl">📦</span>
+      </figure>
 
       {/* Content */}
-      <div className="p-6">
-        {/* Name */}
-        <Link href={`/products/${product.id}`} className="block group/name">
-          <h3 className="font-display font-medium text-lg line-clamp-2 group-hover/name:text-coral transition mb-2">
-            {product.name}
-          </h3>
-        </Link>
+      <div className="card-body">
+        {/* Header */}
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex-1">
+            <Link href={`/products/${product.id}`} className="hover:text-primary transition">
+              <h3 className="card-title text-lg line-clamp-2">{product.name}</h3>
+            </Link>
+          </div>
+          <div className="badge badge-primary">{product.category}</div>
+        </div>
 
         {/* Stock Status */}
-        <div className="mb-4">
+        <div className="text-sm">
           {product.stock > 0 ? (
-            <p className="text-sm font-mono text-mint-light">✓ In Stock ({product.stock})</p>
+            <p className="text-success">✓ In Stock ({product.stock})</p>
           ) : (
-            <p className="text-sm font-mono text-red-400">Out of stock</p>
+            <p className="text-error">Out of stock</p>
           )}
         </div>
 
+        {/* Divider */}
+        <div className="divider my-2"></div>
+
         {/* Price */}
-        <div className="mb-6 pb-6 border-t border-border">
-          <p className="text-3xl font-display font-medium text-coral mt-4">
-            ${product.price.toFixed(2)}
-          </p>
+        <div className="text-2xl font-bold text-primary">
+          ${product.price.toFixed(2)}
         </div>
 
-        {/* Quantity & Button */}
-        <div className="space-y-3">
-          <div>
-            <label className="font-mono text-10px tracking-widest uppercase text-fg-3 block mb-2">
-              Quantity
-            </label>
-            <input
-              type="number"
-              min="1"
-              max={product.stock || 99}
-              value={quantity}
-              onChange={(e) =>
-                setQuantity(Math.max(1, Math.min(99, parseInt(e.target.value) || 1)))
-              }
-              disabled={product.stock <= 0}
-              className="input text-sm"
-            />
-          </div>
-          <button
-            onClick={handleAddToCart}
+        {/* Quantity & Actions */}
+        <div className="form-control gap-2">
+          <label className="label">
+            <span className="label-text text-xs font-semibold">Quantity</span>
+          </label>
+          <input
+            type="number"
+            min="1"
+            max={product.stock || 99}
+            value={quantity}
+            onChange={(e) =>
+              setQuantity(Math.max(1, Math.min(99, parseInt(e.target.value) || 1)))
+            }
             disabled={product.stock <= 0}
-            className={`w-full py-3 rounded-lg font-semibold transition ${
-              product.stock <= 0
-                ? 'bg-border text-fg-3 cursor-not-allowed'
-                : isAdded
-                ? 'bg-mint text-bg'
-                : 'btn-primary'
-            }`}
-          >
-            {isAdded ? '✓ Added!' : product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
-          </button>
+            className="input input-bordered input-sm"
+          />
         </div>
+
+        {/* Add to Cart Button */}
+        <button
+          onClick={handleAddToCart}
+          disabled={product.stock <= 0}
+          className={`btn btn-block transition ${
+            product.stock <= 0
+              ? 'btn-disabled'
+              : isAdded
+              ? 'btn-success'
+              : 'btn-primary'
+          }`}
+        >
+          {isAdded ? '✓ Added to Cart' : product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
+        </button>
+
+        {/* View Details Link */}
+        <Link href={`/products/${product.id}`} className="link link-primary text-center text-sm">
+          View Details
+        </Link>
       </div>
     </div>
   )
