@@ -12,7 +12,14 @@ export default function Home() {
         background: 'linear-gradient(135deg, #0f1a2a 0%, #13243a 100%)',
         borderBottom: '1px solid rgba(255,255,255,0.08)'
       }}>
-        <div className="container-wide">
+        <div style={{
+        width: '100%',
+        maxWidth: '960px',
+        margin: '0 auto',
+        paddingLeft: '80px',
+        paddingRight: '80px',
+        boxSizing: 'border-box'
+      }}>
           <h1 style={{
             marginBottom: '32px',
             maxWidth: '90%',
@@ -48,7 +55,14 @@ export default function Home() {
         background: '#0f1a2a',
         borderBottom: '1px solid rgba(255,255,255,0.08)'
       }}>
-        <div className="container-wide">
+        <div style={{
+        width: '100%',
+        maxWidth: '960px',
+        margin: '0 auto',
+        paddingLeft: '80px',
+        paddingRight: '80px',
+        boxSizing: 'border-box'
+      }}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '120px', alignItems: 'start' }}>
             <div>
               <span className="section-eyebrow">Overview</span>
@@ -79,7 +93,14 @@ export default function Home() {
         paddingBottom: '80px',
         background: '#0f1a2a'
       }}>
-        <div className="container-wide">
+        <div style={{
+        width: '100%',
+        maxWidth: '960px',
+        margin: '0 auto',
+        paddingLeft: '80px',
+        paddingRight: '80px',
+        boxSizing: 'border-box'
+      }}>
           <span className="section-eyebrow">Features</span>
           <h2 style={{ marginTop: 0, marginBottom: '60px' }}>
             What's Included
@@ -141,7 +162,14 @@ export default function Home() {
         borderTop: '1px solid rgba(255,255,255,0.08)',
         borderBottom: '1px solid rgba(255,255,255,0.08)'
       }}>
-        <div className="container-wide">
+        <div style={{
+        width: '100%',
+        maxWidth: '960px',
+        margin: '0 auto',
+        paddingLeft: '80px',
+        paddingRight: '80px',
+        boxSizing: 'border-box'
+      }}>
           <span className="section-eyebrow">Sample</span>
           <h2 style={{ marginTop: 0, marginBottom: '60px' }}>
             Featured Products
@@ -188,7 +216,14 @@ export default function Home() {
         background: '#0f1a2a',
         borderBottom: '1px solid rgba(255,255,255,0.08)'
       }}>
-        <div className="container-wide">
+        <div style={{
+        width: '100%',
+        maxWidth: '960px',
+        margin: '0 auto',
+        paddingLeft: '80px',
+        paddingRight: '80px',
+        boxSizing: 'border-box'
+      }}>
           <div style={{ maxWidth: '70ch' }}>
             <span className="section-eyebrow">Experience</span>
             <h2 style={{ marginTop: 0 }}>
@@ -215,7 +250,14 @@ export default function Home() {
         borderTop: '1px solid rgba(255,255,255,0.08)',
         textAlign: 'center'
       }}>
-        <div className="container-wide">
+        <div style={{
+        width: '100%',
+        maxWidth: '960px',
+        margin: '0 auto',
+        paddingLeft: '80px',
+        paddingRight: '80px',
+        boxSizing: 'border-box'
+      }}>
           <h2 style={{ marginTop: 0, marginBottom: '24px' }}>
             Ready to Test
           </h2>
@@ -243,7 +285,14 @@ export default function Home() {
         background: '#0a1220',
         borderTop: '1px solid rgba(255,255,255,0.08)'
       }}>
-        <div className="container-wide">
+        <div style={{
+        width: '100%',
+        maxWidth: '960px',
+        margin: '0 auto',
+        paddingLeft: '80px',
+        paddingRight: '80px',
+        boxSizing: 'border-box'
+      }}>
           <div style={{
             display: 'grid',
             gridTemplateColumns: 'repeat(3, 1fr)',
