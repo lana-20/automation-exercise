@@ -22,7 +22,6 @@ export default function Home() {
         }}>
           <h1 style={{
             marginBottom: '32px',
-            maxWidth: '90%',
             color: '#f5f0eb',
             fontSize: '64px',
             fontFamily: 'Playfair Display, serif',
@@ -32,14 +31,15 @@ export default function Home() {
             backgroundImage: 'linear-gradient(90deg, #f5f0eb 0%, #d4a85a 50%, #4aa8a5 100%)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent'
+            WebkitTextFillColor: 'transparent',
+            lineHeight: '1.1'
           }}>
             automation-exercise
           </h1>
           <p style={{
             fontSize: '18px',
             lineHeight: '1.8',
-            maxWidth: '70ch',
+            maxWidth: '800px',
             color: '#d1ccc6',
             marginBottom: '56px',
             fontFamily: 'Inter, sans-serif'
@@ -370,7 +370,7 @@ export default function Home() {
           paddingRight: '80px',
           boxSizing: 'border-box'
         }}>
-          <div style={{ maxWidth: '70ch' }}>
+          <div style={{ maxWidth: '800px' }}>
             <span style={{
               fontFamily: 'JetBrains Mono, monospace',
               fontSize: '10px',
@@ -392,14 +392,14 @@ export default function Home() {
               }}></span>
               Experience
             </span>
-            <h2 style={{ marginTop: '0', color: '#f5f0eb', fontFamily: 'Playfair Display, serif' }}>The Complete Journey</h2>
-            <p style={{ color: '#d1ccc6', marginBottom: '16px' }}>
+            <h2 style={{ marginTop: '0', color: '#f5f0eb', fontFamily: 'Playfair Display, serif', marginBottom: '24px' }}>The Complete Journey</h2>
+            <p style={{ color: '#d1ccc6', marginBottom: '16px', lineHeight: '1.8' }}>
               Search for products by name. Filter by category. Sort by price. Add items to your cart.
             </p>
-            <p style={{ color: '#d1ccc6', marginBottom: '16px' }}>
+            <p style={{ color: '#d1ccc6', marginBottom: '16px', lineHeight: '1.8' }}>
               Review your order. Proceed to checkout. Fill out the form with validation. Submit your order.
             </p>
-            <p style={{ color: '#d1ccc6' }}>
+            <p style={{ color: '#d1ccc6', lineHeight: '1.8' }}>
               Receive order confirmation with summary. Everything you'd expect from a production e-commerce system.
             </p>
           </div>
