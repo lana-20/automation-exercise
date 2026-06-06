@@ -130,7 +130,7 @@ export default function ProductPage({ params }: ProductPageProps) {
           paddingRight: '80px',
           boxSizing: 'border-box'
         }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px' }}>
+          <div className="two-col-responsive" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr' }}>
             {/* Image */}
             <div>
               <div style={{
@@ -249,7 +249,7 @@ export default function ProductPage({ params }: ProductPageProps) {
                 }}>
                   Specifications
                 </h3>
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)', gap: '20px' }}>
+                <div className="grid-responsive" style={{ display: 'grid', gridTemplateColumns: 'repeat(2, 1fr)' }}>
                   {Object.entries(product.specs || {}).map(([key, value]) => (
                     <div key={key}>
                       <p style={{

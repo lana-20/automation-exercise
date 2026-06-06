@@ -245,6 +245,12 @@ p {
     margin-bottom: 60px;
   }
 
+  .two-col-responsive {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 60px;
+  }
+
   @media (max-width: 1200px) {
     .container-wide {
       max-width: 900px;
@@ -273,6 +279,11 @@ p {
       grid-template-columns: 1fr !important;
       gap: 40px;
     }
+
+    .two-col-responsive {
+      grid-template-columns: 1fr !important;
+      gap: 40px;
+    }
   }
 
   @media (max-width: 768px) {
@@ -288,6 +299,11 @@ p {
     }
 
     .footer-grid {
+      grid-template-columns: 1fr !important;
+      gap: 32px;
+    }
+
+    .two-col-responsive {
       grid-template-columns: 1fr !important;
       gap: 32px;
     }
@@ -313,6 +329,10 @@ p {
     }
 
     .footer-grid {
+      gap: 24px;
+    }
+
+    .two-col-responsive {
       gap: 24px;
     }
 

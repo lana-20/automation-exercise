@@ -202,7 +202,7 @@ export default function CartPage() {
           </p>
 
           {/* Layout */}
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '60px' }}>
+          <div className="two-col-responsive" style={{ display: 'grid', gridTemplateColumns: '1fr 340px' }}>
             {/* Cart Items */}
             <section aria-label="Cart items">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>

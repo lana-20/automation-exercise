@@ -255,7 +255,7 @@ export default function CheckoutPage() {
             Checkout
           </h1>
 
-          <form onSubmit={handleSubmit} style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '60px' }}>
+          <form onSubmit={handleSubmit} className="two-col-responsive" style={{ display: 'grid', gridTemplateColumns: '1fr 340px' }}>
             {/* Form Fields */}
             <div>
               {/* Billing Address */}

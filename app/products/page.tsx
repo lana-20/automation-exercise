@@ -274,7 +274,7 @@ export default function ProductsPage() {
                 Showing <strong style={{ color: '#d4a85a' }}>{filtered.length}</strong> of <strong style={{ color: '#d4a85a' }}>{products.length}</strong> products
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
+              <div className="grid-responsive" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '32px' }}>
                 {filtered.map((product, index) => {
                   const accentColor = getAccentColor(index)
                   return (

@@ -90,7 +90,7 @@ export default function Home() {
           paddingRight: '80px',
           boxSizing: 'border-box'
         }}>
-          <div className="grid-responsive" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'start' }}>
+          <div className="two-col-responsive" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', alignItems: 'start' }}>
             <div>
               <span style={{
                 fontFamily: 'JetBrains Mono, monospace',
