@@ -30,78 +30,85 @@ export default function ProductCard({ product }: { product: Product }) {
   }
 
   return (
-    <div className="card bg-base-100 shadow-lg hover:shadow-xl transition-shadow">
-      {/* Image */}
-      <figure className="bg-gradient-to-br from-base-200 to-base-300 h-48 flex items-center justify-center">
-        <span className="text-5xl">📦</span>
-      </figure>
+    <div className="card-base p-0 overflow-hidden flex flex-col h-full hover:border-blue-300 group">
+      {/* Image Container */}
+      <div className="relative w-full h-48 bg-gradient-to-br from-blue-100 to-indigo-100 flex items-center justify-center overflow-hidden">
+        <span className="text-6xl group-hover:scale-110 transition-transform duration-300">📦</span>
+        <div className="absolute top-3 right-3">
+          <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-blue-600 text-white">
+            {product.category}
+          </span>
+        </div>
+      </div>
 
       {/* Content */}
-      <div className="card-body">
-        {/* Header */}
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex-1">
-            <Link href={`/products/${product.id}`} className="hover:text-primary transition">
-              <h3 className="card-title text-lg line-clamp-2">{product.name}</h3>
-            </Link>
-          </div>
-          <div className="badge badge-primary">{product.category}</div>
-        </div>
+      <div className="p-6 flex flex-col flex-1">
+        {/* Product Name */}
+        <Link href={`/products/${product.id}`} className="group/name">
+          <h3 className="text-lg font-bold text-gray-900 line-clamp-2 group-hover/name:text-blue-600 transition mb-3">
+            {product.name}
+          </h3>
+        </Link>
 
         {/* Stock Status */}
-        <div className="text-sm">
+        <div className="mb-4">
           {product.stock > 0 ? (
-            <p className="text-success">✓ In Stock ({product.stock})</p>
+            <p className="text-sm font-semibold text-green-600">✓ In Stock ({product.stock})</p>
           ) : (
-            <p className="text-error">Out of stock</p>
+            <p className="text-sm font-semibold text-red-600">Out of stock</p>
           )}
         </div>
 
         {/* Divider */}
-        <div className="divider my-2"></div>
+        <div className="border-t border-gray-200 my-4"></div>
 
         {/* Price */}
-        <div className="text-2xl font-bold text-primary">
-          ${product.price.toFixed(2)}
+        <div className="mb-6">
+          <p className="text-3xl font-bold text-blue-600">
+            ${product.price.toFixed(2)}
+          </p>
         </div>
 
-        {/* Quantity & Actions */}
-        <div className="form-control gap-2">
-          <label className="label">
-            <span className="label-text text-xs font-semibold">Quantity</span>
-          </label>
-          <input
-            type="number"
-            min="1"
-            max={product.stock || 99}
-            value={quantity}
-            onChange={(e) =>
-              setQuantity(Math.max(1, Math.min(99, parseInt(e.target.value) || 1)))
-            }
+        {/* Quantity & Button */}
+        <div className="space-y-3 mt-auto">
+          <div>
+            <label className="block text-xs font-semibold text-gray-700 mb-2">
+              Quantity
+            </label>
+            <select
+              value={quantity}
+              onChange={(e) => setQuantity(Math.max(1, Math.min(product.stock || 99, parseInt(e.target.value))))}
+              disabled={product.stock <= 0}
+              className="input-base text-base"
+            >
+              {Array.from({ length: Math.min(10, product.stock || 10) }).map((_, i) => (
+                <option key={i + 1} value={i + 1}>
+                  {i + 1}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Add to Cart Button */}
+          <button
+            onClick={handleAddToCart}
             disabled={product.stock <= 0}
-            className="input input-bordered input-sm"
-          />
+            className={`w-full py-3 rounded-lg font-bold transition-all duration-200 ${
+              product.stock <= 0
+                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                : isAdded
+                ? 'bg-green-600 text-white shadow-lg'
+                : 'bg-gradient-to-r from-blue-600 to-blue-700 text-white hover:shadow-lg hover:scale-105 active:scale-95'
+            }`}
+          >
+            {isAdded ? '✓ Added to Cart!' : product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
+          </button>
+
+          {/* View Details */}
+          <Link href={`/products/${product.id}`} className="btn-secondary w-full text-center text-sm">
+            View Details
+          </Link>
         </div>
-
-        {/* Add to Cart Button */}
-        <button
-          onClick={handleAddToCart}
-          disabled={product.stock <= 0}
-          className={`btn btn-block transition ${
-            product.stock <= 0
-              ? 'btn-disabled'
-              : isAdded
-              ? 'btn-success'
-              : 'btn-primary'
-          }`}
-        >
-          {isAdded ? '✓ Added to Cart' : product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
-        </button>
-
-        {/* View Details Link */}
-        <Link href={`/products/${product.id}`} className="link link-primary text-center text-sm">
-          View Details
-        </Link>
       </div>
     </div>
   )
