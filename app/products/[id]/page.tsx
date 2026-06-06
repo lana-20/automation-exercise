@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, use } from 'react'
 import Link from 'next/link'
 import { useCart } from '@/app/context/CartContext'
 import products from '@/data/products.json'
@@ -10,7 +10,7 @@ interface ProductPageProps {
 }
 
 export default function ProductPage({ params }: ProductPageProps) {
-  const resolvedParams = params
+  const resolvedParams = use(params)
   const [quantity, setQuantity] = useState(1)
   const [addedToCart, setAddedToCart] = useState(false)
   const { addToCart } = useCart()
