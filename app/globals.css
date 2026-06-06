@@ -305,6 +305,12 @@ p {
       padding-right: 40px;
     }
 
+    /* Override inline container padding on responsive pages */
+    main > section > div {
+      padding-left: 40px !important;
+      padding-right: 40px !important;
+    }
+
     .grid-responsive {
       grid-template-columns: 1fr !important;
       gap: 32px;
@@ -334,6 +340,12 @@ p {
     .container-wide {
       padding-left: 20px;
       padding-right: 20px;
+    }
+
+    /* Override inline container padding on mobile */
+    main > section > div {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
     }
 
     .grid-responsive {
