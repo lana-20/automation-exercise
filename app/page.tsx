@@ -143,7 +143,7 @@ export default function Home() {
           <p className="text-gray-700 mb-6 text-lg">
             Begin your automation testing journey with a real, fully functional e-commerce platform.
           </p>
-          <Link href="/products" className="btn-amazon text-lg px-8 py-3">
+          <Link href="/products" className="btn-primary text-lg px-8 py-3">
             Explore Products
           </Link>
         </div>

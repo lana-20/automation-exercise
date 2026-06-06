@@ -22,21 +22,21 @@ h1, h2, h3, h4, h5, h6 {
   color: #0f1419;
 }
 
-/* Amazon-style utilities */
+/* Component utilities */
 @layer components {
-  .btn-amazon {
+  .btn-primary {
     @apply px-6 py-2 bg-gradient-to-b from-amber-300 to-amber-400 hover:from-amber-400 hover:to-amber-500 text-black font-bold rounded-md shadow-sm hover:shadow-md transition-all cursor-pointer border border-amber-500;
   }
 
-  .btn-amazon-sm {
+  .btn-primary-sm {
     @apply px-4 py-1 bg-gradient-to-b from-amber-300 to-amber-400 hover:from-amber-400 hover:to-amber-500 text-black font-bold rounded-md shadow-sm hover:shadow-md transition-all cursor-pointer border border-amber-500 text-sm;
   }
 
-  .card-amazon {
+  .card {
     @apply bg-white rounded-lg border border-gray-200 hover:border-amber-400 hover:shadow-lg transition-all p-4 h-full flex flex-col;
   }
 
-  .input-amazon {
+  .input {
     @apply w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-transparent;
   }
 }

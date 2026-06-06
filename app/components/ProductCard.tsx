@@ -30,7 +30,7 @@ export default function ProductCard({ product }: { product: Product }) {
   }
 
   return (
-    <div className="card-amazon">
+    <div className="card">
       {/* Image Container */}
       <Link href={`/products/${product.id}`} className="group">
         <div className="w-full h-48 bg-gray-100 flex items-center justify-center rounded-lg overflow-hidden group-hover:shadow-md transition mb-4">
@@ -48,7 +48,7 @@ export default function ProductCard({ product }: { product: Product }) {
         </h3>
       </Link>
 
-      {/* Rating (Amazon style) */}
+      {/* Rating */}
       <div className="flex items-center gap-2 mb-3">
         <span className="text-xs text-amber-500">★★★★☆</span>
         <span className="text-xs text-gray-600">(42)</span>
@@ -77,7 +77,7 @@ export default function ProductCard({ product }: { product: Product }) {
           value={quantity}
           onChange={(e) => setQuantity(Math.max(1, Math.min(product.stock || 99, parseInt(e.target.value))))}
           disabled={product.stock <= 0}
-          className="input-amazon text-sm w-16"
+          className="input text-sm w-16"
         >
           {Array.from({ length: Math.min(10, product.stock || 10) }).map((_, i) => (
             <option key={i + 1} value={i + 1}>
@@ -96,7 +96,7 @@ export default function ProductCard({ product }: { product: Product }) {
             ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
             : isAdded
             ? 'bg-green-600 text-white'
-            : 'btn-amazon'
+            : 'btn-primary'
         }`}
       >
         {isAdded ? '✓ Added to Cart' : product.stock <= 0 ? 'Out of Stock' : 'Add to Cart'}
