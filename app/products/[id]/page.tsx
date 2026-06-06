@@ -13,7 +13,7 @@ export default function ProductPage({ params }: ProductPageProps) {
   const resolvedParams = use(params)
   const [quantity, setQuantity] = useState(1)
   const [addedToCart, setAddedToCart] = useState(false)
-  const { addToCart } = useCart()
+  const { addItem } = useCart()
 
   // Get product from static data based on route param
   const product = products.find((p) => p.id === resolvedParams.id)
@@ -37,9 +37,13 @@ export default function ProductPage({ params }: ProductPageProps) {
   }
 
   const handleAddToCart = () => {
-    for (let i = 0; i < quantity; i++) {
-      addToCart(product)
-    }
+    addItem({
+      productId: product.id,
+      name: product.name,
+      price: product.price,
+      quantity: quantity,
+      image: product.category
+    })
     setAddedToCart(true)
     setTimeout(() => setAddedToCart(false), 2000)
   }
