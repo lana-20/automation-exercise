@@ -519,14 +519,12 @@ export default function CartPage() {
             </section>
 
             {/* Order Summary Sidebar */}
-            <aside aria-label="Order summary">
+            <aside aria-label="Order summary" className="order-summary-sidebar">
               <div style={{
                 background: 'rgba(19,36,58,0.5)',
                 border: '2px solid #d4a85a',
                 borderRadius: '6px',
                 padding: '32px',
-                position: 'sticky',
-                top: '100px',
                 boxShadow: '0 8px 24px rgba(212, 170, 90, 0.15)'
               }}>
                 <h2 style={{

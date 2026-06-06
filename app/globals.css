@@ -251,6 +251,18 @@ p {
     gap: 60px;
   }
 
+  .order-summary-sidebar {
+    position: sticky;
+    top: 100px;
+  }
+
+  @media (max-width: 768px) {
+    .order-summary-sidebar {
+      position: static;
+      top: auto;
+    }
+  }
+
   @media (max-width: 1200px) {
     .container-wide {
       max-width: 900px;

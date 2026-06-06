@@ -420,14 +420,12 @@ export default function CheckoutPage() {
             </div>
 
             {/* Order Summary Sidebar */}
-            <aside style={{
+            <aside className="order-summary-sidebar" style={{
               background: 'rgba(19,36,58,0.5)',
               border: '2px solid #d4a85a',
               borderRadius: '6px',
               padding: '28px',
               height: 'fit-content',
-              position: 'sticky',
-              top: '100px',
               boxShadow: '0 8px 24px rgba(212, 170, 90, 0.15)'
             }}>
               <h2 style={{
