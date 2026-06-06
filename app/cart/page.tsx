@@ -4,21 +4,38 @@ import Link from 'next/link'
 import { useCart } from '@/app/context/CartContext'
 
 export default function CartPage() {
-  const { items, removeItem, updateQuantity, subtotal } = useCart()
+  const { cart, removeFromCart, updateQuantity, getTotal } = useCart()
 
-  const tax = subtotal * 0.08
-  const shipping = 10
+  const subtotal = getTotal()
+  const tax = subtotal * 0.1
+  const shipping = subtotal > 100 ? 0 : 9.99
   const total = subtotal + tax + shipping
 
-  if (items.length === 0) {
+  if (cart.length === 0) {
     return (
-      <main className="max-w-7xl mx-auto px-6 py-12">
-        <h1 className="font-display text-3xl mb-8">Shopping Cart</h1>
-        <div className="text-center py-12">
-          <p className="text-dlb-off-white/70 text-lg mb-8">Your cart is empty</p>
+      <main style={{ backgroundColor: 'var(--ae-bg)', minHeight: '100vh' }}>
+        <div className="container-wide" style={{ paddingTop: '48px', paddingBottom: '48px', textAlign: 'center' }}>
+          <div style={{ fontSize: '64px', marginBottom: '16px' }}>🛒</div>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--ae-ink)', marginBottom: '16px' }}>
+            Your Cart is Empty
+          </h1>
+          <p style={{ fontSize: '16px', color: 'var(--ae-ink3)', marginBottom: '24px' }}>
+            Start shopping to add items to your cart.
+          </p>
           <Link
             href="/products"
-            className="inline-block bg-dlb-coral hover:bg-dlb-coral-light px-8 py-3 rounded font-semibold transition"
+            style={{
+              display: 'inline-block',
+              padding: '10px 24px',
+              background: 'var(--ae-amber)',
+              color: 'var(--ae-ink)',
+              fontWeight: '700',
+              borderRadius: '6px',
+              textDecoration: 'none',
+              transition: 'background 0.15s',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--ae-amber-d)')}
+            onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--ae-amber)')}
           >
             Continue Shopping
           </Link>
@@ -28,102 +45,191 @@ export default function CartPage() {
   }
 
   return (
-    <main className="max-w-7xl mx-auto px-6 py-8">
-      <h1 className="font-display text-3xl mb-8">Shopping Cart</h1>
+    <main style={{ backgroundColor: 'var(--ae-bg)', minHeight: '100vh' }}>
+      <section style={{ backgroundColor: 'var(--ae-white)', borderBottom: '1px solid var(--ae-line)' }}>
+        <div className="container-wide" style={{ paddingTop: '24px', paddingBottom: '24px' }}>
+          <h1 style={{ fontSize: '28px', fontWeight: '700', color: 'var(--ae-ink)' }}>Shopping Cart</h1>
+        </div>
+      </section>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {/* Cart Items */}
-        <div className="lg:col-span-2">
-          <div className="bg-dlb-card border border-white/10 rounded-lg overflow-hidden">
-            <div className="grid grid-cols-12 gap-4 p-4 border-b border-white/10 text-sm text-dlb-off-white/70 font-semibold">
-              <div className="col-span-5">Product</div>
-              <div className="col-span-2">Qty</div>
-              <div className="col-span-3">Price</div>
-              <div className="col-span-2"></div>
-            </div>
-
-            {items.map(item => (
-              <div
-                key={item.productId}
-                className="grid grid-cols-12 gap-4 p-4 border-b border-white/10 items-center hover:bg-dlb-bg-dark transition"
-              >
-                <div className="col-span-5">
-                  <Link href={`/products/${item.productId}`} className="hover:text-dlb-coral transition">
-                    {item.name}
-                  </Link>
-                </div>
-
-                <div className="col-span-2">
-                  <input
-                    type="number"
-                    min="1"
-                    max="99"
-                    value={item.quantity}
-                    onChange={(e) => updateQuantity(item.productId, parseInt(e.target.value) || 1)}
-                    className="w-16 px-2 py-1 bg-dlb-bg border border-white/10 rounded text-sm"
-                  />
-                </div>
-
-                <div className="col-span-3 text-dlb-coral font-bold">
-                  ${(item.price * item.quantity).toFixed(2)}
-                </div>
-
-                <div className="col-span-2 text-right">
-                  <button
-                    onClick={() => removeItem(item.productId)}
-                    className="text-red-500 hover:text-red-400 transition font-bold"
+      <section style={{ paddingTop: '24px', paddingBottom: '48px' }}>
+        <div className="container-wide">
+          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '32px' }}>
+            {/* Cart Items */}
+            <div>
+              {cart.map((item, idx) => (
+                <div
+                  key={idx}
+                  style={{
+                    display: 'grid',
+                    gridTemplateColumns: '80px 1fr auto',
+                    gap: '16px',
+                    alignItems: 'start',
+                    paddingBottom: '20px',
+                    borderBottom: '1px solid var(--ae-line)',
+                    marginBottom: '20px',
+                  }}
+                >
+                  {/* Product Image */}
+                  <div
+                    style={{
+                      width: '80px',
+                      height: '80px',
+                      background: '#f3f4f6',
+                      borderRadius: '8px',
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      fontSize: '36px',
+                    }}
                   >
-                    ×
-                  </button>
+                    {item.category === 'Electronics' && '💻'}
+                    {item.category === 'Apparel' && '👕'}
+                    {item.category === 'Home' && '🏠'}
+                    {item.category === 'Books' && '📚'}
+                  </div>
+
+                  {/* Product Info */}
+                  <div>
+                    <h3 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--ae-ink)', marginBottom: '4px' }}>
+                      {item.name}
+                    </h3>
+                    <p style={{ fontSize: '13px', color: 'var(--ae-ink3)', marginBottom: '8px' }}>
+                      {item.category}
+                    </p>
+                    <p style={{ fontSize: '14px', fontWeight: '700', color: 'var(--ae-red)' }}>
+                      ${item.price.toFixed(2)}
+                    </p>
+                  </div>
+
+                  {/* Quantity & Actions */}
+                  <div style={{ textAlign: 'right' }}>
+                    <div style={{ marginBottom: '12px' }}>
+                      <label style={{ fontSize: '12px', fontWeight: '700', color: 'var(--ae-ink3)', display: 'block', marginBottom: '4px' }}>
+                        Qty
+                      </label>
+                      <select
+                        value={item.quantity}
+                        onChange={(e) => updateQuantity(idx, parseInt(e.target.value))}
+                        style={{
+                          padding: '6px 8px',
+                          fontSize: '13px',
+                          border: '1px solid var(--ae-line)',
+                          borderRadius: '4px',
+                          backgroundColor: 'var(--ae-white)',
+                          color: 'var(--ae-ink)',
+                        }}
+                      >
+                        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((num) => (
+                          <option key={num} value={num}>
+                            {num}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <button
+                      onClick={() => removeFromCart(idx)}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        color: 'var(--ae-red)',
+                        cursor: 'pointer',
+                        fontSize: '13px',
+                        fontWeight: '700',
+                        textDecoration: 'underline',
+                        padding: 0,
+                      }}
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-6 flex gap-4">
-            <Link
-              href="/products"
-              className="flex-1 px-6 py-3 border border-dlb-coral text-dlb-coral rounded hover:bg-dlb-card transition font-semibold text-center"
-            >
-              ← Continue Shopping
-            </Link>
-          </div>
-        </div>
-
-        {/* Order Summary */}
-        <div>
-          <div className="bg-dlb-card border border-white/10 rounded-lg p-6 sticky top-20">
-            <h3 className="font-semibold text-lg mb-6">Order Summary</h3>
-
-            <div className="space-y-3 text-sm mb-6 pb-6 border-b border-white/10">
-              <div className="flex justify-between">
-                <span className="text-dlb-off-white/70">Subtotal</span>
-                <span>${subtotal.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-dlb-off-white/70">Tax (8%)</span>
-                <span>${tax.toFixed(2)}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-dlb-off-white/70">Shipping</span>
-                <span>${shipping.toFixed(2)}</span>
-              </div>
+              ))}
             </div>
 
-            <div className="flex justify-between font-bold text-lg mb-6">
-              <span>Total</span>
-              <span className="text-dlb-coral">${total.toFixed(2)}</span>
-            </div>
+            {/* Order Summary */}
+            <div>
+              <div style={{ backgroundColor: 'var(--ae-white)', border: '1px solid var(--ae-line)', borderRadius: '8px', padding: '20px' }}>
+                <h3 style={{ fontSize: '16px', fontWeight: '700', color: 'var(--ae-ink)', marginBottom: '20px' }}>
+                  Order Summary
+                </h3>
 
-            <Link
-              href="/checkout"
-              className="w-full block bg-dlb-coral hover:bg-dlb-coral-light text-center px-6 py-3 rounded font-semibold transition"
-            >
-              Proceed to Checkout
-            </Link>
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
+                  <span style={{ color: 'var(--ae-ink3)', fontSize: '14px' }}>Subtotal</span>
+                  <span style={{ fontWeight: '600', color: 'var(--ae-ink)' }}>${subtotal.toFixed(2)}</span>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '12px' }}>
+                  <span style={{ color: 'var(--ae-ink3)', fontSize: '14px' }}>Tax (10%)</span>
+                  <span style={{ fontWeight: '600', color: 'var(--ae-ink)' }}>${tax.toFixed(2)}</span>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '20px', paddingBottom: '20px', borderBottom: '1px solid var(--ae-line)' }}>
+                  <span style={{ color: 'var(--ae-ink3)', fontSize: '14px' }}>
+                    Shipping {subtotal > 100 && <span style={{ color: 'var(--ae-green)' }}>(FREE)</span>}
+                  </span>
+                  <span style={{ fontWeight: '600', color: 'var(--ae-ink)' }}>${shipping.toFixed(2)}</span>
+                </div>
+
+                <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '24px' }}>
+                  <span style={{ fontSize: '16px', fontWeight: '700', color: 'var(--ae-ink)' }}>Total</span>
+                  <span style={{ fontSize: '20px', fontWeight: '700', color: 'var(--ae-red)' }}>
+                    ${total.toFixed(2)}
+                  </span>
+                </div>
+
+                <Link
+                  href="/checkout"
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    padding: '12px',
+                    textAlign: 'center',
+                    background: 'var(--ae-amber)',
+                    color: 'var(--ae-ink)',
+                    fontWeight: '700',
+                    borderRadius: '6px',
+                    textDecoration: 'none',
+                    transition: 'background 0.15s',
+                    marginBottom: '12px',
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.background = 'var(--ae-amber-d)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.background = 'var(--ae-amber)')}
+                >
+                  Proceed to Checkout
+                </Link>
+
+                <Link
+                  href="/products"
+                  style={{
+                    display: 'block',
+                    width: '100%',
+                    padding: '12px',
+                    textAlign: 'center',
+                    background: 'var(--ae-white)',
+                    color: 'var(--ae-blue)',
+                    fontWeight: '700',
+                    border: '1px solid var(--ae-line)',
+                    borderRadius: '6px',
+                    textDecoration: 'none',
+                    transition: 'all 0.15s',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--ae-blue)'
+                    e.currentTarget.style.background = '#f0f9ff'
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.borderColor = 'var(--ae-line)'
+                    e.currentTarget.style.background = 'var(--ae-white)'
+                  }}
+                >
+                  Continue Shopping
+                </Link>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
     </main>
   )
 }
