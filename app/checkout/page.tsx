@@ -7,7 +7,8 @@ import { useCart } from '@/app/context/CartContext'
 
 export default function CheckoutPage() {
   const router = useRouter()
-  const { cart, getTotal, clearCart } = useCart()
+  const { items, subtotal, clearCart } = useCart()
+  const cart = items
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -93,13 +94,12 @@ export default function CheckoutPage() {
     setIsSubmitting(true)
     // Simulate API call
     setTimeout(() => {
-      sessionStorage.setItem('lastOrder', JSON.stringify({ items: cart, total: getTotal() }))
+      sessionStorage.setItem('lastOrder', JSON.stringify({ items: cart, total: subtotal }))
       clearCart()
       router.push('/confirmation')
     }, 1000)
   }
 
-  const subtotal = getTotal()
   const tax = subtotal * 0.1
   const shipping = subtotal > 100 ? 0 : 9.99
   const total = subtotal + tax + shipping

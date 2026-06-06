@@ -4,9 +4,9 @@ import Link from 'next/link'
 import { useCart } from '@/app/context/CartContext'
 
 export default function CartPage() {
-  const { cart, removeFromCart, updateQuantity, getTotal } = useCart()
+  const { items, removeItem, updateQuantity, subtotal } = useCart()
 
-  const subtotal = getTotal()
+  const cart = items
   const tax = subtotal * 0.1
   const shipping = subtotal > 100 ? 0 : 9.99
   const total = subtotal + tax + shipping
@@ -110,7 +110,7 @@ export default function CartPage() {
                       </label>
                       <select
                         value={item.quantity}
-                        onChange={(e) => updateQuantity(idx, parseInt(e.target.value))}
+                        onChange={(e) => updateQuantity(item.productId, parseInt(e.target.value))}
                         style={{
                           padding: '6px 8px',
                           fontSize: '13px',
@@ -128,7 +128,7 @@ export default function CartPage() {
                       </select>
                     </div>
                     <button
-                      onClick={() => removeFromCart(idx)}
+                      onClick={() => removeItem(cart[idx].productId)}
                       style={{
                         background: 'none',
                         border: 'none',
