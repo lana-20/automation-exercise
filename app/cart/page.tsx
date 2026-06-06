@@ -7,13 +7,11 @@ import products from '@/data/products.json'
 export default function CartPage() {
   const { items, removeItem, updateQuantity, clearCart, itemCount } = useCart()
 
-  // Get product stock levels
   const getProductStock = (productId: string) => {
     const product = products.find(p => p.id === productId)
     return product?.stock || 0
   }
 
-  // Check for oversold items
   const oversoldItems = items.filter(item => item.quantity > getProductStock(item.productId))
   const hasOversoldItems = oversoldItems.length > 0
 
@@ -63,12 +61,18 @@ export default function CartPage() {
                 fontWeight: '600',
                 borderRadius: '4px',
                 textDecoration: 'none',
-                transition: 'background 150ms',
+                transition: 'all 150ms',
                 fontSize: '14px',
                 letterSpacing: '0.5px'
               }}
-              onMouseEnter={(e) => e.currentTarget.style.background = '#e8785a'}
-              onMouseLeave={(e) => e.currentTarget.style.background = '#d4552a'}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = '#e8785a'
+                e.currentTarget.style.boxShadow = '0 8px 16px rgba(212, 85, 42, 0.3)'
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = '#d4552a'
+                e.currentTarget.style.boxShadow = 'none'
+              }}
             >
               Continue Shopping
             </Link>
@@ -82,7 +86,7 @@ export default function CartPage() {
     <main style={{ background: '#0f1a2a', minHeight: '100vh' }}>
       {/* Header */}
       <section style={{
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
+        borderBottom: '3px solid #7455bf',
         paddingTop: '24px',
         paddingBottom: '24px',
         background: '#0f1a2a'
@@ -116,9 +120,10 @@ export default function CartPage() {
           <div style={{
             fontSize: '12px',
             fontFamily: 'JetBrains Mono, monospace',
-            color: '#a8a39d',
+            color: '#7455bf',
             textTransform: 'uppercase',
-            letterSpacing: '0.1em'
+            letterSpacing: '0.1em',
+            fontWeight: '600'
           }}>
             Shopping Cart
           </div>
@@ -138,11 +143,12 @@ export default function CartPage() {
           {/* Stock Warning Alert */}
           {hasOversoldItems && (
             <div role="alert" aria-live="polite" style={{
-              background: 'rgba(212, 85, 42, 0.12)',
+              background: 'rgba(212, 85, 42, 0.15)',
               border: '2px solid #d4552a',
               borderRadius: '6px',
               padding: '20px',
-              marginBottom: '40px'
+              marginBottom: '40px',
+              boxShadow: '0 4px 12px rgba(212, 85, 42, 0.2)'
             }}>
               <h2 style={{
                 fontSize: '14px',
@@ -186,10 +192,11 @@ export default function CartPage() {
           <p style={{
             fontSize: '13px',
             fontFamily: 'JetBrains Mono, monospace',
-            color: '#a8a39d',
+            color: '#7455bf',
             textTransform: 'uppercase',
             letterSpacing: '0.1em',
-            marginBottom: '40px'
+            marginBottom: '40px',
+            fontWeight: '600'
           }}>
             {itemCount} item{itemCount !== 1 ? 's' : ''} · {items.length} product{items.length !== 1 ? 's' : ''}
           </p>
@@ -199,9 +206,12 @@ export default function CartPage() {
             {/* Cart Items */}
             <section aria-label="Cart items">
               <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-                {items.map((item) => {
+                {items.map((item, index) => {
                   const stock = getProductStock(item.productId)
                   const isOverstock = item.quantity > stock
+                  const accentColors = ['#4aa8a5', '#d4a85a', '#7455bf', '#3d6abf']
+                  const accentColor = accentColors[index % accentColors.length]
+                  
                   return (
                     <article
                       key={item.productId}
@@ -210,9 +220,11 @@ export default function CartPage() {
                         gridTemplateColumns: '100px 1fr',
                         gap: '24px',
                         paddingBottom: '24px',
-                        borderBottom: '1px solid rgba(255,255,255,0.08)',
+                        borderBottom: `2px solid ${accentColor}`,
                         opacity: isOverstock ? 0.75 : 1,
-                        transition: 'opacity 150ms'
+                        transition: 'opacity 150ms',
+                        paddingLeft: '16px',
+                        borderLeft: `4px solid ${accentColor}`
                       }}
                     >
                       {/* Product Image */}
@@ -225,7 +237,7 @@ export default function CartPage() {
                         alignItems: 'center',
                         justifyContent: 'center',
                         fontSize: '40px',
-                        border: isOverstock ? '2px solid #d4552a' : '1px solid rgba(255,255,255,0.08)',
+                        border: isOverstock ? `2px solid #d4552a` : `1px solid rgba(255,255,255,0.08)`,
                         flexShrink: 0
                       }}>
                         {item.image}
@@ -259,8 +271,9 @@ export default function CartPage() {
                                 fontFamily: 'JetBrains Mono, monospace',
                                 textTransform: 'uppercase',
                                 letterSpacing: '0.1em',
-                                color: '#a8a39d',
-                                marginBottom: '6px'
+                                color: '#d4a85a',
+                                marginBottom: '6px',
+                                fontWeight: '600'
                               }}>
                                 Unit Price
                               </label>
@@ -268,7 +281,7 @@ export default function CartPage() {
                                 fontSize: '20px',
                                 fontFamily: 'Playfair Display, serif',
                                 fontWeight: '500',
-                                color: '#d4552a'
+                                color: '#d4a85a'
                               }}>
                                 ${item.price.toFixed(2)}
                               </span>
@@ -282,15 +295,20 @@ export default function CartPage() {
                                 fontFamily: 'JetBrains Mono, monospace',
                                 textTransform: 'uppercase',
                                 letterSpacing: '0.1em',
-                                color: '#a8a39d',
-                                marginBottom: '6px'
+                                color: '#4aa8a5',
+                                marginBottom: '6px',
+                                fontWeight: '600'
                               }}>
                                 Availability
                               </label>
                               <span style={{
                                 fontSize: '14px',
                                 color: isOverstock ? '#d4552a' : '#4aa8a5',
-                                fontWeight: isOverstock ? '600' : '500'
+                                fontWeight: isOverstock ? '600' : '500',
+                                display: 'inline-block',
+                                padding: '4px 8px',
+                                background: isOverstock ? 'rgba(212, 85, 42, 0.1)' : 'rgba(74, 168, 165, 0.1)',
+                                borderRadius: '3px'
                               }}>
                                 {isOverstock ? '✗ Exceeds stock' : `✓ ${stock} available`}
                               </span>
@@ -319,9 +337,10 @@ export default function CartPage() {
                               fontFamily: 'JetBrains Mono, monospace',
                               textTransform: 'uppercase',
                               letterSpacing: '0.1em',
-                              color: '#a8a39d',
+                              color: accentColor,
                               marginBottom: '6px',
-                              display: 'block'
+                              display: 'block',
+                              fontWeight: '600'
                             }}>
                               Qty
                             </legend>
@@ -330,7 +349,7 @@ export default function CartPage() {
                               aria-label={`Decrease ${item.name} quantity`}
                               style={{
                                 background: 'none',
-                                border: '1px solid rgba(255,255,255,0.14)',
+                                border: `2px solid ${accentColor}`,
                                 color: '#f5f0eb',
                                 padding: '6px 12px',
                                 borderRadius: '4px',
@@ -344,12 +363,12 @@ export default function CartPage() {
                                 minWidth: '40px'
                               }}
                               onMouseEnter={(e) => {
-                                e.currentTarget.style.background = 'rgba(255,255,255,0.08)'
-                                e.currentTarget.style.borderColor = '#d4552a'
+                                e.currentTarget.style.background = accentColor
+                                e.currentTarget.style.color = '#0f1a2a'
                               }}
                               onMouseLeave={(e) => {
                                 e.currentTarget.style.background = 'none'
-                                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.14)'
+                                e.currentTarget.style.color = '#f5f0eb'
                               }}
                             >
                               −
@@ -373,7 +392,7 @@ export default function CartPage() {
                               aria-label={`Increase ${item.name} quantity${item.quantity >= stock ? ' (at stock limit)' : ''}`}
                               style={{
                                 background: 'none',
-                                border: '1px solid rgba(255,255,255,0.14)',
+                                border: `2px solid ${accentColor}`,
                                 color: '#f5f0eb',
                                 padding: '6px 12px',
                                 borderRadius: '4px',
@@ -389,13 +408,13 @@ export default function CartPage() {
                               }}
                               onMouseEnter={(e) => {
                                 if (item.quantity < stock) {
-                                  e.currentTarget.style.background = 'rgba(255,255,255,0.08)'
-                                  e.currentTarget.style.borderColor = '#d4552a'
+                                  e.currentTarget.style.background = accentColor
+                                  e.currentTarget.style.color = '#0f1a2a'
                                 }
                               }}
                               onMouseLeave={(e) => {
                                 e.currentTarget.style.background = 'none'
-                                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.14)'
+                                e.currentTarget.style.color = '#f5f0eb'
                               }}
                             >
                               +
@@ -422,8 +441,9 @@ export default function CartPage() {
                                 fontFamily: 'JetBrains Mono, monospace',
                                 textTransform: 'uppercase',
                                 letterSpacing: '0.1em',
-                                color: '#a8a39d',
-                                marginBottom: '2px'
+                                color: accentColor,
+                                marginBottom: '2px',
+                                fontWeight: '600'
                               }}>
                                 Subtotal
                               </div>
@@ -431,7 +451,7 @@ export default function CartPage() {
                                 fontSize: '18px',
                                 fontFamily: 'Playfair Display, serif',
                                 fontWeight: '500',
-                                color: '#d4552a'
+                                color: accentColor
                               }}>
                                 ${(item.price * item.quantity).toFixed(2)}
                               </div>
@@ -467,14 +487,14 @@ export default function CartPage() {
               </div>
 
               {/* Clear Cart */}
-              <div style={{ marginTop: '40px', paddingTop: '24px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
+              <div style={{ marginTop: '40px', paddingTop: '24px', borderTop: '2px solid #3d6abf' }}>
                 <button
                   onClick={clearCart}
                   aria-label="Clear all items from cart"
                   style={{
                     background: 'transparent',
-                    border: '1px solid rgba(212, 85, 42, 0.3)',
-                    color: '#d4552a',
+                    border: '2px solid #7455bf',
+                    color: '#7455bf',
                     padding: '10px 18px',
                     borderRadius: '4px',
                     cursor: 'pointer',
@@ -485,12 +505,12 @@ export default function CartPage() {
                     fontFamily: 'Inter, sans-serif'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'rgba(212, 85, 42, 0.1)'
-                    e.currentTarget.style.borderColor = '#d4552a'
+                    e.currentTarget.style.background = '#7455bf'
+                    e.currentTarget.style.color = '#0f1a2a'
                   }}
                   onMouseLeave={(e) => {
                     e.currentTarget.style.background = 'transparent'
-                    e.currentTarget.style.borderColor = 'rgba(212, 85, 42, 0.3)'
+                    e.currentTarget.style.color = '#7455bf'
                   }}
                 >
                   Clear All Items
@@ -502,19 +522,20 @@ export default function CartPage() {
             <aside aria-label="Order summary">
               <div style={{
                 background: 'rgba(19,36,58,0.5)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                border: '2px solid #d4a85a',
                 borderRadius: '6px',
                 padding: '32px',
                 position: 'sticky',
-                top: '100px'
+                top: '100px',
+                boxShadow: '0 8px 24px rgba(212, 170, 90, 0.15)'
               }}>
                 <h2 style={{
-                  fontSize: '16px',
+                  fontSize: '14px',
                   fontFamily: 'JetBrains Mono, monospace',
                   fontWeight: '600',
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
-                  color: '#d4552a',
+                  color: '#d4a85a',
                   marginTop: 0,
                   marginBottom: '24px'
                 }}>
@@ -528,11 +549,11 @@ export default function CartPage() {
                   gap: '14px',
                   marginBottom: '20px',
                   paddingBottom: '20px',
-                  borderBottom: '1px solid rgba(255,255,255,0.08)'
+                  borderBottom: '2px solid #4aa8a5'
                 }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
                     <span style={{ color: '#d1ccc6' }}>Subtotal</span>
-                    <span style={{ color: '#f5f0eb', fontWeight: '500' }}>${subtotal.toFixed(2)}</span>
+                    <span style={{ color: '#d4a85a', fontWeight: '600' }}>${subtotal.toFixed(2)}</span>
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
                     <span style={{ color: '#d1ccc6' }}>Tax (10%)</span>
@@ -540,7 +561,7 @@ export default function CartPage() {
                   </div>
                   <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '14px' }}>
                     <span style={{ color: '#d1ccc6' }}>
-                      Shipping {subtotal > 100 && <span style={{ fontSize: '12px', color: '#a8a39d' }}>(FREE)</span>}
+                      Shipping {subtotal > 100 && <span style={{ fontSize: '12px', color: '#4aa8a5' }}>(FREE)</span>}
                     </span>
                     <span style={{ color: '#f5f0eb', fontWeight: '500' }}>${shipping.toFixed(2)}</span>
                   </div>
@@ -554,7 +575,7 @@ export default function CartPage() {
                   marginBottom: '28px'
                 }}>
                   <span style={{
-                    fontSize: '14px',
+                    fontSize: '12px',
                     fontFamily: 'JetBrains Mono, monospace',
                     fontWeight: '600',
                     textTransform: 'uppercase',
@@ -567,7 +588,7 @@ export default function CartPage() {
                     fontSize: '28px',
                     fontFamily: 'Playfair Display, serif',
                     fontWeight: '500',
-                    color: '#d4552a'
+                    color: '#d4a85a'
                   }}>
                     ${total.toFixed(2)}
                   </span>
@@ -597,18 +618,21 @@ export default function CartPage() {
                       textAlign: 'center',
                       textDecoration: 'none',
                       cursor: hasOversoldItems ? 'not-allowed' : 'pointer',
-                      transition: 'background 150ms',
+                      transition: 'all 150ms',
                       opacity: hasOversoldItems ? 0.6 : 1,
-                      fontFamily: 'Inter, sans-serif'
+                      fontFamily: 'Inter, sans-serif',
+                      boxShadow: !hasOversoldItems ? '0 4px 12px rgba(212, 85, 42, 0.3)' : 'none'
                     }}
                     onMouseEnter={(e) => {
                       if (!hasOversoldItems) {
                         e.currentTarget.style.background = '#e8785a'
+                        e.currentTarget.style.boxShadow = '0 8px 20px rgba(212, 85, 42, 0.5)'
                       }
                     }}
                     onMouseLeave={(e) => {
                       if (!hasOversoldItems) {
                         e.currentTarget.style.background = '#d4552a'
+                        e.currentTarget.style.boxShadow = '0 4px 12px rgba(212, 85, 42, 0.3)'
                       }
                     }}
                   >
@@ -625,7 +649,7 @@ export default function CartPage() {
                       fontSize: '14px',
                       fontWeight: '600',
                       letterSpacing: '0.5px',
-                      border: '1px solid rgba(255,255,255,0.08)',
+                      border: '2px solid #4aa8a5',
                       borderRadius: '4px',
                       textAlign: 'center',
                       textDecoration: 'none',
@@ -634,12 +658,14 @@ export default function CartPage() {
                       fontFamily: 'Inter, sans-serif'
                     }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.background = 'rgba(255,255,255,0.04)'
-                      e.currentTarget.style.borderColor = '#d1ccc6'
+                      e.currentTarget.style.background = 'rgba(74, 168, 165, 0.1)'
+                      e.currentTarget.style.borderColor = '#4aa8a5'
+                      e.currentTarget.style.color = '#4aa8a5'
                     }}
                     onMouseLeave={(e) => {
                       e.currentTarget.style.background = 'transparent'
-                      e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)'
+                      e.currentTarget.style.borderColor = '#4aa8a5'
+                      e.currentTarget.style.color = '#d1ccc6'
                     }}
                   >
                     Continue Shopping

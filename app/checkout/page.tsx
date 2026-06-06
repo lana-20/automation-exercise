@@ -8,7 +8,6 @@ import { useCart } from '@/app/context/CartContext'
 export default function CheckoutPage() {
   const router = useRouter()
   const { items, clearCart } = useCart()
-  const cart = items
 
   const subtotal = items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
   const tax = subtotal * 0.1
@@ -32,7 +31,7 @@ export default function CheckoutPage() {
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  if (cart.length === 0) {
+  if (items.length === 0) {
     return (
       <main style={{ background: '#0f1a2a', minHeight: '100vh' }}>
         <section style={{ paddingTop: '120px', paddingBottom: '120px', textAlign: 'center' }}>
@@ -57,8 +56,7 @@ export default function CheckoutPage() {
             <p style={{
               fontSize: '16px',
               color: '#d1ccc6',
-              marginBottom: '40px',
-              lineHeight: '1.8'
+              marginBottom: '40px'
             }}>
               Your cart is empty. Add items to continue.
             </p>
@@ -72,7 +70,7 @@ export default function CheckoutPage() {
                 fontWeight: '600',
                 borderRadius: '4px',
                 textDecoration: 'none',
-                transition: 'background 150ms',
+                transition: 'all 150ms',
                 fontSize: '14px',
                 letterSpacing: '0.5px'
               }}
@@ -134,6 +132,7 @@ export default function CheckoutPage() {
     value,
     error,
     required = true,
+    accentColor = '#7455bf',
   }: {
     label: string
     name: string
@@ -142,6 +141,7 @@ export default function CheckoutPage() {
     value: string
     error?: string
     required?: boolean
+    accentColor?: string
   }) => (
     <div style={{ marginBottom: '16px' }}>
       <label style={{
@@ -151,7 +151,7 @@ export default function CheckoutPage() {
         fontWeight: '600',
         textTransform: 'uppercase',
         letterSpacing: '0.1em',
-        color: '#a8a39d',
+        color: accentColor,
         marginBottom: '8px'
       }}>
         {label} {required && '*'}
@@ -168,20 +168,21 @@ export default function CheckoutPage() {
           fontSize: '14px',
           fontFamily: 'Inter, sans-serif',
           background: 'rgba(19,36,58,0.5)',
-          border: error ? '2px solid #d4552a' : '1px solid rgba(255,255,255,0.08)',
+          border: error ? '2px solid #d4552a' : `2px solid ${accentColor}`,
           borderRadius: '4px',
           color: '#f5f0eb',
           transition: 'all 150ms',
-          boxSizing: 'border-box',
-          '::placeholder': { color: 'rgba(245,240,235,0.38)' }
+          boxSizing: 'border-box'
         }}
         onFocus={(e) => {
           e.currentTarget.style.background = 'rgba(19,36,58,0.7)'
-          e.currentTarget.style.borderColor = error ? '#d4552a' : '#d4552a'
+          e.currentTarget.style.borderColor = error ? '#d4552a' : accentColor
+          e.currentTarget.style.boxShadow = `0 0 0 3px ${accentColor}20`
         }}
         onBlur={(e) => {
           e.currentTarget.style.background = 'rgba(19,36,58,0.5)'
-          e.currentTarget.style.borderColor = error ? '#d4552a' : 'rgba(255,255,255,0.08)'
+          e.currentTarget.style.borderColor = error ? '#d4552a' : accentColor
+          e.currentTarget.style.boxShadow = 'none'
         }}
       />
       {error && (
@@ -189,9 +190,10 @@ export default function CheckoutPage() {
           color: '#d4552a',
           fontSize: '12px',
           marginTop: '4px',
-          marginBottom: 0
+          marginBottom: 0,
+          fontWeight: '600'
         }}>
-          {error}
+          ✗ {error}
         </p>
       )}
     </div>
@@ -201,7 +203,7 @@ export default function CheckoutPage() {
     <main style={{ background: '#0f1a2a', minHeight: '100vh' }}>
       {/* Header */}
       <section style={{
-        borderBottom: '1px solid rgba(255,255,255,0.08)',
+        borderBottom: '3px solid #4aa8a5',
         paddingTop: '24px',
         paddingBottom: '24px'
       }}>
@@ -244,7 +246,11 @@ export default function CheckoutPage() {
             fontWeight: '500',
             color: '#f5f0eb',
             marginBottom: '40px',
-            marginTop: 0
+            marginTop: 0,
+            backgroundImage: 'linear-gradient(90deg, #f5f0eb 0%, #d4a85a 100%)',
+            backgroundClip: 'text',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent'
           }}>
             Checkout
           </h1>
@@ -253,14 +259,22 @@ export default function CheckoutPage() {
             {/* Form Fields */}
             <div>
               {/* Billing Address */}
-              <fieldset style={{ border: 'none', padding: 0, margin: 0, marginBottom: '48px' }}>
+              <fieldset style={{
+                border: 'none',
+                padding: '24px',
+                margin: 0,
+                marginBottom: '48px',
+                background: 'rgba(19,36,58,0.5)',
+                borderRadius: '6px',
+                borderLeft: '6px solid #7455bf'
+              }}>
                 <legend style={{
                   fontSize: '14px',
                   fontFamily: 'JetBrains Mono, monospace',
                   fontWeight: '600',
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
-                  color: '#d4552a',
+                  color: '#7455bf',
                   marginBottom: '20px',
                   padding: 0
                 }}>
@@ -274,6 +288,7 @@ export default function CheckoutPage() {
                     value={formData.firstName}
                     error={errors.firstName}
                     placeholder="John"
+                    accentColor="#7455bf"
                   />
                   <FormInput
                     label="Last Name"
@@ -281,6 +296,7 @@ export default function CheckoutPage() {
                     value={formData.lastName}
                     error={errors.lastName}
                     placeholder="Doe"
+                    accentColor="#7455bf"
                   />
                 </div>
 
@@ -291,6 +307,7 @@ export default function CheckoutPage() {
                   value={formData.email}
                   error={errors.email}
                   placeholder="john@example.com"
+                  accentColor="#7455bf"
                 />
 
                 <FormInput
@@ -300,6 +317,7 @@ export default function CheckoutPage() {
                   value={formData.phone}
                   error={errors.phone}
                   placeholder="(555) 123-4567"
+                  accentColor="#7455bf"
                 />
 
                 <FormInput
@@ -308,6 +326,7 @@ export default function CheckoutPage() {
                   value={formData.address}
                   error={errors.address}
                   placeholder="123 Main St"
+                  accentColor="#7455bf"
                 />
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 120px 80px', gap: '12px' }}>
@@ -317,6 +336,7 @@ export default function CheckoutPage() {
                     value={formData.city}
                     error={errors.city}
                     placeholder="Seattle"
+                    accentColor="#7455bf"
                   />
                   <FormInput
                     label="State"
@@ -324,6 +344,7 @@ export default function CheckoutPage() {
                     value={formData.state}
                     error={errors.state}
                     placeholder="WA"
+                    accentColor="#7455bf"
                   />
                   <FormInput
                     label="ZIP"
@@ -331,19 +352,27 @@ export default function CheckoutPage() {
                     value={formData.zipCode}
                     error={errors.zipCode}
                     placeholder="98101"
+                    accentColor="#7455bf"
                   />
                 </div>
               </fieldset>
 
               {/* Payment */}
-              <fieldset style={{ border: 'none', padding: 0, margin: 0 }}>
+              <fieldset style={{
+                border: 'none',
+                padding: '24px',
+                margin: 0,
+                background: 'rgba(19,36,58,0.5)',
+                borderRadius: '6px',
+                borderLeft: '6px solid #3d6abf'
+              }}>
                 <legend style={{
                   fontSize: '14px',
                   fontFamily: 'JetBrains Mono, monospace',
                   fontWeight: '600',
                   textTransform: 'uppercase',
                   letterSpacing: '0.1em',
-                  color: '#d4552a',
+                  color: '#3d6abf',
                   marginBottom: '20px',
                   padding: 0
                 }}>
@@ -356,6 +385,7 @@ export default function CheckoutPage() {
                   value={formData.cardName}
                   error={errors.cardName}
                   placeholder="John Doe"
+                  accentColor="#3d6abf"
                 />
 
                 <FormInput
@@ -364,6 +394,7 @@ export default function CheckoutPage() {
                   value={formData.cardNumber}
                   error={errors.cardNumber}
                   placeholder="1234 5678 9012 3456"
+                  accentColor="#3d6abf"
                 />
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
@@ -373,6 +404,7 @@ export default function CheckoutPage() {
                     value={formData.cardExpiry}
                     error={errors.cardExpiry}
                     placeholder="12/25"
+                    accentColor="#3d6abf"
                   />
                   <FormInput
                     label="CVC"
@@ -381,6 +413,7 @@ export default function CheckoutPage() {
                     value={formData.cardCvc}
                     error={errors.cardCvc}
                     placeholder="123"
+                    accentColor="#3d6abf"
                   />
                 </div>
               </fieldset>
@@ -389,12 +422,13 @@ export default function CheckoutPage() {
             {/* Order Summary Sidebar */}
             <aside style={{
               background: 'rgba(19,36,58,0.5)',
-              border: '1px solid rgba(255,255,255,0.08)',
+              border: '2px solid #d4a85a',
               borderRadius: '6px',
               padding: '28px',
               height: 'fit-content',
               position: 'sticky',
-              top: '100px'
+              top: '100px',
+              boxShadow: '0 8px 24px rgba(212, 170, 90, 0.15)'
             }}>
               <h2 style={{
                 fontSize: '14px',
@@ -402,7 +436,7 @@ export default function CheckoutPage() {
                 fontWeight: '600',
                 textTransform: 'uppercase',
                 letterSpacing: '0.1em',
-                color: '#d4552a',
+                color: '#d4a85a',
                 marginTop: 0,
                 marginBottom: '20px'
               }}>
@@ -416,7 +450,7 @@ export default function CheckoutPage() {
                 gap: '12px',
                 marginBottom: '20px',
                 paddingBottom: '20px',
-                borderBottom: '1px solid rgba(255,255,255,0.08)'
+                borderBottom: '2px solid #4aa8a5'
               }}>
                 {items.slice(0, 3).map((item) => (
                   <div key={item.productId} style={{
@@ -427,7 +461,7 @@ export default function CheckoutPage() {
                     <span style={{ color: '#d1ccc6' }}>
                       {item.name} <span style={{ color: '#a8a39d' }}>×{item.quantity}</span>
                     </span>
-                    <span style={{ color: '#f5f0eb', fontWeight: '500' }}>
+                    <span style={{ color: '#d4a85a', fontWeight: '600' }}>
                       ${(item.price * item.quantity).toFixed(2)}
                     </span>
                   </div>
@@ -435,7 +469,7 @@ export default function CheckoutPage() {
                 {items.length > 3 && (
                   <div style={{
                     fontSize: '12px',
-                    color: '#a8a39d',
+                    color: '#7455bf',
                     fontStyle: 'italic',
                     paddingTop: '8px'
                   }}>
@@ -451,7 +485,7 @@ export default function CheckoutPage() {
                 gap: '10px',
                 marginBottom: '20px',
                 paddingBottom: '20px',
-                borderBottom: '1px solid rgba(255,255,255,0.08)'
+                borderBottom: '2px solid #3d6abf'
               }}>
                 <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px' }}>
                   <span style={{ color: '#d1ccc6' }}>Subtotal</span>
@@ -488,7 +522,7 @@ export default function CheckoutPage() {
                   fontSize: '24px',
                   fontFamily: 'Playfair Display, serif',
                   fontWeight: '500',
-                  color: '#d4552a'
+                  color: '#d4a85a'
                 }}>
                   ${total.toFixed(2)}
                 </span>
@@ -509,18 +543,21 @@ export default function CheckoutPage() {
                   border: 'none',
                   borderRadius: '4px',
                   cursor: isSubmitting ? 'not-allowed' : 'pointer',
-                  transition: 'background 150ms',
+                  transition: 'all 150ms',
                   opacity: isSubmitting ? 0.7 : 1,
-                  fontFamily: 'Inter, sans-serif'
+                  fontFamily: 'Inter, sans-serif',
+                  boxShadow: '0 4px 12px rgba(212, 85, 42, 0.3)'
                 }}
                 onMouseEnter={(e) => {
                   if (!isSubmitting) {
                     e.currentTarget.style.background = '#e8785a'
+                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(212, 85, 42, 0.5)'
                   }
                 }}
                 onMouseLeave={(e) => {
                   if (!isSubmitting) {
                     e.currentTarget.style.background = '#d4552a'
+                    e.currentTarget.style.boxShadow = '0 4px 12px rgba(212, 85, 42, 0.3)'
                   }
                 }}
               >
