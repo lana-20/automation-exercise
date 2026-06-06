@@ -278,7 +278,7 @@ export default function ProductsPage() {
                 {filtered.map((product, index) => {
                   const accentColor = getAccentColor(index)
                   return (
-                    <Link key={product.id} href={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                    <Link key={product.id} href={`/products/${product.id}`} style={{ textDecoration: 'none', color: 'inherit', scrollMarginTop: '64px' }}>
                       <article style={{
                         background: 'rgba(19,36,58,0.5)',
                         border: `2px solid ${accentColor}`,
