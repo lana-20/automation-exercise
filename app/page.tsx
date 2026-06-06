@@ -479,12 +479,7 @@ export default function Home() {
           paddingRight: '80px',
           boxSizing: 'border-box'
         }}>
-          <div style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gap: '60px',
-            marginBottom: '60px'
-          }}>
+          <div className="footer-grid">
             <div>
               <h4 style={{
                 fontFamily: 'Inter, sans-serif',

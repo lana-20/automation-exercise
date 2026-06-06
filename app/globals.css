@@ -238,6 +238,13 @@ p {
     gap: 120px;
   }
 
+  .footer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+
   @media (max-width: 1200px) {
     .container-wide {
       max-width: 900px;
@@ -261,6 +268,11 @@ p {
       grid-template-columns: 1fr !important;
       gap: 40px;
     }
+
+    .footer-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px;
+    }
   }
 
   @media (max-width: 768px) {
@@ -271,6 +283,11 @@ p {
     }
 
     .grid-responsive {
+      grid-template-columns: 1fr !important;
+      gap: 32px;
+    }
+
+    .footer-grid {
       grid-template-columns: 1fr !important;
       gap: 32px;
     }
@@ -292,6 +309,10 @@ p {
     }
 
     .grid-responsive {
+      gap: 24px;
+    }
+
+    .footer-grid {
       gap: 24px;
     }
 
