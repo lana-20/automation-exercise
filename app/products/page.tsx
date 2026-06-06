@@ -140,7 +140,7 @@ export default function ProductsPage() {
                   </h3>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginBottom: '8px' }}>
                     <span style={{ color: 'var(--ae-amber-d)', fontSize: '13px', letterSpacing: '1px' }}>★★★★☆</span>
-                    <span style={{ fontSize: '12px', color: 'var(--ae-ink3)' }}>({Math.floor(Math.random() * 300) + 50})</span>
+                    <span style={{ fontSize: '12px', color: 'var(--ae-ink3)' }}>({parseInt(product.id.slice(-3)) * 2 + 50})</span>
                   </div>
                   <div style={{ fontSize: '18px', fontWeight: '700', color: 'var(--ae-red)', marginBottom: '4px' }}>
                     ${product.price.toFixed(2)}
